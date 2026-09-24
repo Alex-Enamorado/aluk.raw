@@ -149,6 +149,7 @@ html{
   html{ scroll-behavior:smooth; }
 }
 body{
+  position:relative;
   margin:0;
   background:var(--bg);
   color:var(--text);
@@ -778,12 +779,13 @@ p{ margin:0; }
 }
 .footer-inner p{ font-size:.85rem; color:rgba(246,248,245,.75); }
 
-/* textura de grano fija sobre toda la pagina: da calidez analogica sin animarse */
+/* textura de grano sobre toda la pagina: posicion absoluta (no fixed) y sin
+   mix-blend-mode para que el navegador la pinte una sola vez y no tenga que
+   recalcular el blend en cada frame de scroll (eso era lo que iba lento). */
 .page-grain{
-  position:fixed; inset:0;
+  position:absolute; inset:0;
   z-index:5;
-  opacity:.035;
-  mix-blend-mode:overlay;
+  opacity:.03;
   pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
