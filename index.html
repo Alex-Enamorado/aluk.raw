@@ -591,12 +591,13 @@ p{ margin:0; }
 @media (min-width:1024px){ .video-grid{ grid-template-columns:repeat(3,1fr); } }
 
 .video-trigger{ position:relative; display:block; width:100%; aspect-ratio:16/10; border-radius:var(--radius-lg); overflow:hidden; }
-.video-trigger img{
+.video-preview{
   width:100%; height:100%; object-fit:cover;
-  filter:blur(2px) sepia(.15) saturate(.85) contrast(1.05) brightness(.84);
+  background:var(--bg-elevated-2);
+  filter:sepia(.15) saturate(.85) contrast(1.05) brightness(.84);
   transition:filter var(--t-slow) var(--ease);
 }
-.video-trigger:hover img, .video-trigger:focus-visible img{ filter:blur(0) sepia(.15) saturate(.85) contrast(1.05) brightness(1); }
+.video-trigger:hover .video-preview, .video-trigger:focus-visible .video-preview{ filter:sepia(.15) saturate(.85) contrast(1.05) brightness(1); }
 .play-icon{
   position:absolute; inset:0;
   display:flex; align-items:center; justify-content:center;
@@ -1002,12 +1003,20 @@ p{ margin:0; }
     <h2 class="section-title" data-reveal="focus">videografia</h2>
     <p class="section-lead reveal">Piezas audiovisuales breves, con ritmo natural y una estética cálida, pensadas para contar lo esencial.</p>
 
-    <!-- TODO: cambia data-embed por la URL de embed real (YouTube/Vimeo) de cada video -->
+    <!-- TODO: cambia data-embed por la URL de embed real (YouTube/Vimeo) de cada video.
+         Cada tarjeta reproduce un clip corto y silencioso en bucle (sin necesidad de
+         clic) apenas entra en pantalla. Coloca esos clips en una carpeta "videos" junto
+         a este archivo, con nombres cortos y livianos (unos segundos, sin audio,
+         idealmente menos de 2-3 MB cada uno): videos/preview-raices.mp4, etc.
+         Mientras no agregues el archivo, el navegador simplemente muestra la miniatura
+         (atributo poster) sin errores. -->
     <div class="video-grid" id="video-grid">
 
       <article class="video-card reveal">
         <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: raices">
-          <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=900&q=75">
+            <source src="videos/preview-raices.mp4" type="video/mp4">
+          </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
@@ -1020,7 +1029,9 @@ p{ margin:0; }
 
       <article class="video-card reveal">
         <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: entre mareas">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=75">
+            <source src="videos/preview-entre-mareas.mp4" type="video/mp4">
+          </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
@@ -1033,7 +1044,9 @@ p{ margin:0; }
 
       <article class="video-card reveal">
         <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: vuelo bajo">
-          <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=900&q=75">
+            <source src="videos/preview-vuelo-bajo.mp4" type="video/mp4">
+          </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
@@ -1046,7 +1059,9 @@ p{ margin:0; }
 
       <article class="video-card reveal">
         <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: camino verde">
-          <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=900&q=75">
+            <source src="videos/preview-camino-verde.mp4" type="video/mp4">
+          </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
@@ -1059,7 +1074,9 @@ p{ margin:0; }
 
       <article class="video-card reveal">
         <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: retratos de oficio">
-          <img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=75">
+            <source src="videos/preview-retratos-de-oficio.mp4" type="video/mp4">
+          </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
@@ -1072,7 +1089,9 @@ p{ margin:0; }
 
       <article class="video-card reveal">
         <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: horizonte">
-          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=900&q=75">
+            <source src="videos/preview-horizonte.mp4" type="video/mp4">
+          </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
@@ -1494,6 +1513,7 @@ p{ margin:0; }
   var videoClose = document.getElementById('video-modal-close');
   var videoTriggers = document.querySelectorAll('.video-trigger');
   var lastVideoFocusedEl = null;
+  var activePreview = null;
 
   function openVideoModal(embedUrl){
     lastVideoFocusedEl = document.activeElement;
@@ -1513,9 +1533,12 @@ p{ margin:0; }
     videoFrame.innerHTML = '';
     document.body.style.overflow = '';
     if(lastVideoFocusedEl) lastVideoFocusedEl.focus();
+    if(activePreview){ activePreview.play().catch(function(){}); activePreview = null; }
   }
   videoTriggers.forEach(function(trigger){
     trigger.addEventListener('click', function(){
+      activePreview = trigger.querySelector('.video-preview');
+      if(activePreview) activePreview.pause();
       openVideoModal(trigger.getAttribute('data-embed'));
     });
   });
@@ -1526,6 +1549,25 @@ p{ margin:0; }
   window.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && !videoModal.hidden) closeVideoModal();
   });
+
+  /* ---------- vistas previas: reproduccion silenciosa en bucle al entrar en pantalla,
+     sin necesidad de clic. Se pausan fuera de vista para no gastar recursos, y no se
+     activan si el usuario prefiere menos movimiento. ---------- */
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var previewObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var video = entry.target;
+        if(entry.isIntersecting){
+          video.play().catch(function(){});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold:0.4 });
+    document.querySelectorAll('.video-preview').forEach(function(video){
+      previewObserver.observe(video);
+    });
+  }
 
   /* ---------- estadisticas: se muestran directamente, sin conteo animado ---------- */
   document.querySelectorAll('.stat-number').forEach(function(el){
