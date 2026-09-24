@@ -1266,8 +1266,16 @@ p{ margin:0; }
       </ul>
     </div>
 
-    <!-- TODO: conecta este formulario a tu backend/servicio de envio (ej. Formspree, EmailJS, tu propio endpoint) -->
-    <form class="contact-form reveal" id="contact-form" novalidate>
+    <!-- Formulario conectado a FormSubmit (formsubmit.co) — sin backend propio.
+         IMPORTANTE: la primera vez que alguien envie el formulario (incluida tu
+         propia prueba), FormSubmit te mandara un correo de activacion a
+         alexenamoradocaballero+fotografia@gmail.com que debes confirmar con un
+         clic. Despues de esa unica confirmacion, todos los envios futuros llegan
+         directo a tu correo sin pasos adicionales. -->
+    <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/alexenamoradocaballero%2Bfotografia%40gmail.com" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Nuevo mensaje desde aluk.raw">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <div class="form-row">
         <label for="name">nombre</label>
         <input type="text" id="name" name="name" autocomplete="name" required>
@@ -1609,20 +1617,33 @@ p{ margin:0; }
   });
 
   /* ---------- formulario de contacto ----------
-     No hay backend conectado todavia. Este bloque valida
-     el formulario y muestra un mensaje de confirmacion local.
-     Para produccion, conecta "action"/fetch a tu servicio
-     de envio (Formspree, EmailJS, tu propio endpoint, etc). */
+     Envia de verdad via FormSubmit (formsubmit.co), sin backend propio.
+     Nota: el primer envio activa una confirmacion por correo que hay
+     que aceptar una sola vez (ver comentario junto al <form>). */
   var contactForm = document.getElementById('contact-form');
   var formStatus = document.getElementById('form-status');
+  var contactSubmitBtn = contactForm.querySelector('button[type="submit"]');
   contactForm.addEventListener('submit', function(e){
     e.preventDefault();
     if(!contactForm.checkValidity()){
       contactForm.reportValidity();
       return;
     }
-    formStatus.textContent = 'Mensaje enviado. Te responderé muy pronto, ¡gracias por escribir!';
-    contactForm.reset();
+    contactSubmitBtn.disabled = true;
+    formStatus.textContent = 'Enviando...';
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(response){
+      if(!response.ok) throw new Error('respuesta no valida');
+      formStatus.textContent = 'Mensaje enviado. Te responderé muy pronto, ¡gracias por escribir!';
+      contactForm.reset();
+    }).catch(function(){
+      formStatus.textContent = 'No se pudo enviar. Escribime directo por whatsapp o correo, por favor.';
+    }).finally(function(){
+      contactSubmitBtn.disabled = false;
+    });
   });
 
 })();
