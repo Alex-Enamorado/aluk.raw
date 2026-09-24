@@ -203,7 +203,7 @@ p{ margin:0; }
 }
 .section-title{
   font-family:var(--font-display);
-  font-weight:300;
+  font-weight:400;
   text-transform:lowercase;
   font-size:clamp(1.9rem, 4.2vw, 2.85rem);
   line-height:1.08;
@@ -425,10 +425,29 @@ p{ margin:0; }
 .bloom-1{ width:26rem; height:26rem; top:-6rem; right:-6rem; background:radial-gradient(circle, var(--verde-hoja), transparent 70%); }
 .bloom-2{ width:20rem; height:20rem; bottom:8%; left:-4rem; background:radial-gradient(circle, var(--verde-salvia), transparent 70%); }
 
+.hero-watermark{
+  position:absolute;
+  z-index:0;
+  top:-4vw; right:-3vw;
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:300;
+  text-transform:lowercase;
+  font-size:40vw;
+  line-height:1;
+  color:var(--blanco-calido);
+  opacity:.05;
+  mix-blend-mode:overlay;
+  pointer-events:none;
+  user-select:none;
+  white-space:nowrap;
+}
+@media (max-width:700px){ .hero-watermark{ display:none; } }
+
 .hero-content{ position:relative; z-index:1; padding-block:4rem 5rem; }
 .hero-title{
   font-family:var(--font-display);
-  font-weight:300;
+  font-weight:400;
   text-transform:lowercase;
   font-size:clamp(2.6rem, 8.5vw, 5.6rem);
   line-height:.98;
@@ -845,6 +864,10 @@ p{ margin:0; }
     <div class="hero-bloom bloom-2"></div>
     <div class="hero-gradient"></div>
   </div>
+
+  <!-- palabra decorativa gigante en DeFonte Leger: muestra el efecto de halacion
+       de la fuente a gran escala, tal como pide el brief original -->
+  <p class="hero-watermark" aria-hidden="true">raw</p>
 
   <div class="container hero-content">
     <p class="eyebrow reveal">fotografia · video · edicion</p>
