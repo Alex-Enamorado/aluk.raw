@@ -260,6 +260,15 @@ p{ margin:0; }
   border:1.5px solid var(--border);
 }
 .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
+.btn-link{
+  padding:.8rem .2rem;
+  border-radius:0;
+  color:var(--text);
+  border-bottom:1.5px solid var(--border);
+}
+.btn-link:hover{ color:var(--accent); border-color:var(--accent); }
+.btn-link svg{ width:1.05rem; height:1.05rem; transition:transform var(--t-fast) var(--ease); }
+.btn-link:hover svg{ transform:translateX(3px); }
 .btn-whatsapp{
   background:var(--verde-hoja);
   color:var(--blanco-calido);
@@ -286,13 +295,13 @@ p{ margin:0; }
   inset:0 0 auto 0;
   height:var(--header-h);
   z-index:200;
-  background:var(--header-bg);
-  backdrop-filter:blur(12px) saturate(115%);
-  -webkit-backdrop-filter:blur(12px) saturate(115%);
+  background:transparent;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
   border-bottom:1px solid transparent;
   transition:border-color var(--t-fast) var(--ease), background var(--t-slow) var(--ease);
 }
-.site-header.is-scrolled{ border-bottom-color:var(--border); }
+.site-header.is-scrolled{ background:var(--header-bg); border-bottom-color:var(--border); }
 .header-inner{
   height:100%;
   display:flex;
@@ -387,11 +396,12 @@ p{ margin:0; }
 .hero-media{ position:absolute; inset:0; z-index:0; }
 .hero-image{
   width:100%; height:100%; object-fit:cover;
-  filter:saturate(1.05) brightness(.85);
+  filter:sepia(.16) saturate(.85) contrast(1.06) brightness(.8);
 }
 .hero-gradient{
   position:absolute; inset:0;
   background:
+    radial-gradient(120% 90% at 50% 45%, transparent 45%, rgba(11,26,22,.55) 100%),
     linear-gradient(180deg, rgba(11,26,22,.55) 0%, rgba(11,26,22,.35) 35%, rgba(11,26,22,.92) 100%),
     linear-gradient(0deg, var(--negro-verdoso) 0%, transparent 30%);
 }
@@ -503,11 +513,11 @@ p{ margin:0; }
 .gallery-trigger{ position:relative; display:block; width:100%; border-radius:var(--radius-lg); overflow:hidden; }
 .gallery-trigger img{
   width:100%; height:auto;
-  filter:blur(1.5px) saturate(.88) brightness(.94);
+  filter:blur(1.5px) sepia(.15) saturate(.82) contrast(1.05) brightness(.9);
   transition:filter var(--t-slow) var(--ease);
 }
 .gallery-trigger:hover img, .gallery-trigger:focus-visible img{
-  filter:blur(0) saturate(1) brightness(1);
+  filter:blur(0) sepia(.15) saturate(.82) contrast(1.05) brightness(1);
 }
 .gallery-overlay{
   position:absolute; inset:0;
@@ -580,21 +590,13 @@ p{ margin:0; }
 @media (min-width:640px){ .video-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (min-width:1024px){ .video-grid{ grid-template-columns:repeat(3,1fr); } }
 
-.video-card{
-  background:var(--bg-elevated);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  transition:transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
-}
-.video-card:hover{ box-shadow:0 14px 26px -18px rgba(var(--glow-color),.22); }
-.video-trigger{ position:relative; display:block; width:100%; aspect-ratio:16/10; overflow:hidden; }
+.video-trigger{ position:relative; display:block; width:100%; aspect-ratio:16/10; border-radius:var(--radius-lg); overflow:hidden; }
 .video-trigger img{
   width:100%; height:100%; object-fit:cover;
-  filter:blur(2px) brightness(.88);
+  filter:blur(2px) sepia(.15) saturate(.85) contrast(1.05) brightness(.84);
   transition:filter var(--t-slow) var(--ease);
 }
-.video-trigger:hover img, .video-trigger:focus-visible img{ filter:blur(0) brightness(1); }
+.video-trigger:hover img, .video-trigger:focus-visible img{ filter:blur(0) sepia(.15) saturate(.85) contrast(1.05) brightness(1); }
 .play-icon{
   position:absolute; inset:0;
   display:flex; align-items:center; justify-content:center;
@@ -609,7 +611,7 @@ p{ margin:0; }
 }
 .video-trigger:hover .play-icon span{ background:var(--accent-strong); transform:scale(1.08); }
 .play-icon svg{ width:1.6rem; height:1.6rem; color:var(--blanco-calido); margin-left:3px; }
-.video-info{ padding:1.35rem; }
+.video-info{ padding:1.1rem 0 0; }
 .video-info h3{
   font-family:var(--font-display);
   font-weight:600;
@@ -651,7 +653,7 @@ p{ margin:0; }
 @media (min-width:900px){ .about-grid{ grid-template-columns:.85fr 1fr; } }
 .about-media img{
   border-radius:var(--radius-lg);
-  filter:saturate(1.03);
+  filter:sepia(.12) saturate(.92) contrast(1.04);
   box-shadow:0 30px 60px -30px rgba(0,0,0,.5);
 }
 .about-content p{ margin-top:1.1rem; color:var(--text-muted); max-width:34rem; }
@@ -676,29 +678,29 @@ p{ margin:0; }
 .services-grid{
   display:grid;
   grid-template-columns:1fr;
-  gap:1.5rem;
-  margin-top:2.5rem;
+  gap:2.25rem;
+  margin-top:2.75rem;
 }
-@media (min-width:640px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:640px){ .services-grid{ grid-template-columns:repeat(2,1fr); gap:2.5rem 2rem; } }
 @media (min-width:1024px){ .services-grid{ grid-template-columns:repeat(4,1fr); } }
 .service-card{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:2rem 1.6rem;
-  transition:border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+  border-top:1px solid var(--border);
+  padding-top:1.75rem;
+  transition:border-color var(--t-fast) var(--ease);
 }
-.service-card:hover{ border-color:var(--accent); box-shadow:0 12px 24px -20px rgba(var(--glow-color),.25); }
-.service-icon{
-  width:3.4rem; height:3.4rem;
-  border-radius:50%;
-  background:var(--bg-elevated-2);
-  display:flex; align-items:center; justify-content:center;
-  color:var(--accent);
+.service-card:hover{ border-color:var(--accent); }
+.service-index{
+  display:block;
+  font-family:var(--font-body);
+  font-size:.8rem;
+  color:var(--text-muted);
+  letter-spacing:.04em;
+  margin-bottom:1.5rem;
 }
+.service-icon{ color:var(--accent); }
 .service-icon svg{ width:1.6rem; height:1.6rem; }
 .service-card h3{
-  margin-top:1.4rem;
+  margin-top:1.1rem;
   font-family:var(--font-display);
   font-weight:600;
   text-transform:lowercase;
@@ -847,7 +849,10 @@ p{ margin:0; }
     <p class="hero-subtitle reveal">Fotografía y video con mirada natural: capturo momentos reales, con luz honesta y una estética cinematográfica.</p>
     <div class="hero-actions reveal">
       <a href="#fotografia" class="btn btn-primary">ver portafolio</a>
-      <a href="#contacto" class="btn btn-outline">contactame</a>
+      <a href="#contacto" class="btn btn-link">
+        contactame
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
     </div>
   </div>
 
@@ -859,7 +864,7 @@ p{ margin:0; }
 <!-- ===================== FOTOGRAFIA ===================== -->
 <section class="section" id="fotografia">
   <div class="container">
-    <p class="eyebrow reveal">portafolio</p>
+    <p class="eyebrow reveal">01 — portafolio</p>
     <h2 class="section-title" data-reveal="focus">fotografia</h2>
     <p class="section-lead reveal">Una selección de trabajos recientes en naturaleza, retrato, eventos y producto — luz natural y composición honesta.</p>
 
@@ -993,7 +998,7 @@ p{ margin:0; }
 <!-- ===================== VIDEOGRAFIA ===================== -->
 <section class="section section-alt" id="videografia">
   <div class="container">
-    <p class="eyebrow reveal">reel</p>
+    <p class="eyebrow reveal">02 — reel</p>
     <h2 class="section-title" data-reveal="focus">videografia</h2>
     <p class="section-lead reveal">Piezas audiovisuales breves, con ritmo natural y una estética cálida, pensadas para contar lo esencial.</p>
 
@@ -1090,7 +1095,7 @@ p{ margin:0; }
       <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Fotografo trabajando con su camara al aire libre" loading="lazy">
     </div>
     <div class="about-content">
-      <p class="eyebrow reveal">quien soy</p>
+      <p class="eyebrow reveal">03 — quien soy</p>
       <h2 class="section-title" data-reveal="focus">sobre mi</h2>
       <p class="reveal">Soy fotógrafo y videógrafo, y llevo más de siete años contando historias con luz natural. Me interesa lo real: los gestos espontáneos, los paisajes sin retocar y los momentos que no se repiten.</p>
       <p class="reveal">Trabajo cerca de mis clientes, desde la primera idea hasta la entrega final, cuidando cada detalle técnico sin perder la espontaneidad de lo vivido.</p>
@@ -1116,11 +1121,12 @@ p{ margin:0; }
 <!-- ===================== SERVICIOS ===================== -->
 <section class="section section-alt" id="servicios">
   <div class="container">
-    <p class="eyebrow reveal">lo que ofrezco</p>
+    <p class="eyebrow reveal">04 — lo que ofrezco</p>
     <h2 class="section-title" data-reveal="focus">servicios</h2>
 
     <div class="services-grid">
       <article class="service-card reveal">
+        <span class="service-index">01</span>
         <span class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1-1.6h5.8l1 1.6h1.6A2.5 2.5 0 0 1 20 8.5v9A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5z"></path>
@@ -1132,6 +1138,7 @@ p{ margin:0; }
       </article>
 
       <article class="service-card reveal">
+        <span class="service-index">02</span>
         <span class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="7" width="12" height="10" rx="2.4"></rect>
@@ -1143,6 +1150,7 @@ p{ margin:0; }
       </article>
 
       <article class="service-card reveal">
+        <span class="service-index">03</span>
         <span class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 5v6M6 15v4M12 5v3M12 12v7M18 5v10M18 19v0"></path>
@@ -1156,6 +1164,7 @@ p{ margin:0; }
       </article>
 
       <article class="service-card reveal">
+        <span class="service-index">04</span>
         <span class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="6" cy="6" r="2.2"></circle>
@@ -1177,7 +1186,7 @@ p{ margin:0; }
 <section class="section" id="contacto">
   <div class="container contact-grid">
     <div class="contact-info reveal">
-      <p class="eyebrow">hablemos</p>
+      <p class="eyebrow">05 — hablemos</p>
       <h2 class="section-title" data-reveal="focus">contacto</h2>
       <p>Cuéntame sobre tu proyecto y te responderé en menos de 48 horas con una propuesta a tu medida.</p>
 
