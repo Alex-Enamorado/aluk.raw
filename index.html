@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>aluk.raw — Fotografía y Videografía</title>
 <meta name="description" content="aluk.raw — Fotografía y videografía con mirada natural y cinematográfica. Portafolio de retrato, eventos, naturaleza, producto y piezas audiovisuales.">
-<meta name="theme-color" content="#0b1a16">
+<meta name="theme-color" content="#1a1d14">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="Portafolio de fotografía y videografía con mirada natural y cinematográfica.">
 
 <!-- Favicon simple (circulo verde) -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232d8956'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23f6f8f5'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%237cb350'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23f6f1e4'/%3E%3C/svg%3E">
 
 <!-- Inter (Google Fonts) — usada para parrafos, formulario, numeros y cualquier texto con acentos/enie.
      Plus Jakarta Sans — respaldo temporal de DeFonte reduced (terminales suaves y redondeadas,
@@ -84,13 +84,14 @@
    VARIABLES / TOKENS
    ========================================================= */
 :root{
-  /* paleta de marca */
-  --verde-profundo:#005950;
-  --verde-bosque:#026747;
-  --verde-hoja:#2d8956;
-  --verde-salvia:#378b7b;
-  --blanco-calido:#f6f8f5;
-  --negro-verdoso:#0b1a16;
+  /* paleta de marca: tonos calidos de bosque/musgo en vez de verdes frios tipo teal,
+     para una sensacion acogedora de cabaña de cine en vez de spa tecnologico */
+  --verde-profundo:#2b3a22;
+  --verde-bosque:#3f5c2e;
+  --verde-hoja:#7cb350;
+  --verde-salvia:#93a17c;
+  --blanco-calido:#f6f1e4;
+  --negro-verdoso:#1a1d14;
 
   /* tipografia */
   --font-display:'DeFonte reduced','Plus Jakarta Sans','Inter','Helvetica Neue',Arial,sans-serif;
@@ -113,29 +114,29 @@
   color-scheme: dark;
   /* tema oscuro (por defecto) */
   --bg:var(--negro-verdoso);
-  --bg-elevated:#10241f;
-  --bg-elevated-2:#143028;
+  --bg-elevated:#242819;
+  --bg-elevated-2:#302b1e;
   --text:var(--blanco-calido);
-  --text-muted:#c3d1cb;
+  --text-muted:#cbc4ad;
   --accent:var(--verde-hoja);
   --accent-strong:var(--verde-bosque);
-  --border:rgba(55,139,123,.28);
-  --header-bg:rgba(11,26,22,.72);
-  --glow-color:45,137,86;
+  --border:rgba(147,161,124,.28);
+  --header-bg:rgba(26,29,20,.72);
+  --glow-color:124,179,80;
 }
 
 :root[data-theme="light"]{
   color-scheme: light;
   --bg:var(--blanco-calido);
-  --bg-elevated:#ffffff;
-  --bg-elevated-2:#eef3ef;
+  --bg-elevated:#fffbf2;
+  --bg-elevated-2:#efe9d8;
   --text:var(--negro-verdoso);
-  --text-muted:#3f5a51;
+  --text-muted:#5c5744;
   --accent:var(--verde-bosque);
   --accent-strong:var(--verde-profundo);
-  --border:rgba(2,103,71,.18);
-  --header-bg:rgba(246,248,245,.75);
-  --glow-color:2,103,71;
+  --border:rgba(63,92,46,.18);
+  --header-bg:rgba(246,241,228,.75);
+  --glow-color:63,92,46;
 }
 
 /* =========================================================
@@ -402,8 +403,8 @@ p{ margin:0; }
 .hero-gradient{
   position:absolute; inset:0;
   background:
-    radial-gradient(120% 90% at 50% 45%, transparent 45%, rgba(11,26,22,.55) 100%),
-    linear-gradient(180deg, rgba(11,26,22,.55) 0%, rgba(11,26,22,.35) 35%, rgba(11,26,22,.92) 100%),
+    radial-gradient(120% 90% at 50% 45%, transparent 45%, rgba(26,29,20,.55) 100%),
+    linear-gradient(180deg, rgba(26,29,20,.55) 0%, rgba(26,29,20,.35) 35%, rgba(26,29,20,.92) 100%),
     linear-gradient(0deg, var(--negro-verdoso) 0%, transparent 30%);
 }
 .hero-grain{
@@ -467,7 +468,7 @@ p{ margin:0; }
   position:absolute; inset:0;
   background:
     radial-gradient(38rem 26rem at 88% 0%, rgba(var(--glow-color),.10), transparent 60%),
-    radial-gradient(30rem 22rem at 4% 100%, rgba(55,139,123,.10), transparent 60%);
+    radial-gradient(30rem 22rem at 4% 100%, rgba(147,161,124,.10), transparent 60%);
   pointer-events:none;
 }
 .section > .container{ position:relative; z-index:1; }
@@ -564,12 +565,12 @@ p{ margin:0; }
   position:absolute;
   width:3rem; height:3rem;
   border-radius:50%;
-  background:rgba(246,248,245,.08);
+  background:rgba(246,241,228,.08);
   color:var(--blanco-calido);
   display:flex; align-items:center; justify-content:center;
   transition:background var(--t-fast) var(--ease);
 }
-.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:rgba(246,248,245,.18); }
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:rgba(246,241,228,.18); }
 .lightbox-close{ top:1.5rem; right:1.5rem; }
 .lightbox-prev{ left:1.5rem; top:50%; transform:translateY(-50%); }
 .lightbox-next{ right:1.5rem; top:50%; transform:translateY(-50%); }
@@ -606,7 +607,7 @@ p{ margin:0; }
 .play-icon span{
   width:4rem; height:4rem;
   border-radius:50%;
-  background:rgba(246,248,245,.14);
+  background:rgba(246,241,228,.14);
   backdrop-filter:blur(6px);
   display:flex; align-items:center; justify-content:center;
   transition:background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
@@ -637,10 +638,10 @@ p{ margin:0; }
 .video-modal-close{
   position:absolute; top:-3.25rem; right:0;
   width:2.75rem; height:2.75rem; border-radius:50%;
-  background:rgba(246,248,245,.1); color:var(--blanco-calido);
+  background:rgba(246,241,228,.1); color:var(--blanco-calido);
   display:flex; align-items:center; justify-content:center;
 }
-.video-modal-close:hover{ background:rgba(246,248,245,.2); }
+.video-modal-close:hover{ background:rgba(246,241,228,.2); }
 .video-modal-close svg{ width:1.3rem; height:1.3rem; }
 
 /* =========================================================
@@ -730,7 +731,7 @@ p{ margin:0; }
 }
 .social-list a:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-3px); }
 .social-list svg{ width:1.2rem; height:1.2rem; }
-.social-list.small a{ width:2.3rem; height:2.3rem; border-color:rgba(246,248,245,.25); color:var(--blanco-calido); }
+.social-list.small a{ width:2.3rem; height:2.3rem; border-color:rgba(246,241,228,.25); color:var(--blanco-calido); }
 
 .contact-form{
   background:var(--bg-elevated);
@@ -781,7 +782,7 @@ p{ margin:0; }
   justify-content:space-between;
   gap:1.5rem;
 }
-.footer-inner p{ font-size:.85rem; color:rgba(246,248,245,.75); }
+.footer-inner p{ font-size:.85rem; color:rgba(246,241,228,.75); }
 
 /* textura de grano sobre toda la pagina: posicion absoluta (no fixed) y sin
    mix-blend-mode para que el navegador la pinte una sola vez y no tenga que
