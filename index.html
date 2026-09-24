@@ -789,7 +789,6 @@ p{ margin:0; }
   box-shadow:0 0 0 3px rgba(var(--glow-color),.18);
 }
 .contact-form .btn{ align-self:flex-start; margin-top:.25rem; }
-.form-status{ font-size:.9rem; color:var(--accent); min-height:1.2em; }
 
 /* =========================================================
    FOOTER
@@ -1267,12 +1266,14 @@ p{ margin:0; }
     </div>
 
     <!-- Formulario conectado a FormSubmit (formsubmit.co) — sin backend propio.
+         Envio plano de HTML (sin JS/fetch de por medio) porque es el flujo
+         base que FormSubmit documenta y garantiza que funcione.
          IMPORTANTE: la primera vez que alguien envie el formulario (incluida tu
          propia prueba), FormSubmit te mandara un correo de activacion a
-         alexenamoradocaballero+fotografia@gmail.com que debes confirmar con un
-         clic. Despues de esa unica confirmacion, todos los envios futuros llegan
-         directo a tu correo sin pasos adicionales. -->
-    <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/alexenamoradocaballero%2Bfotografia%40gmail.com" method="POST" novalidate>
+         alexenamoradocaballero+fotografia@gmail.com (revisa tambien spam) que
+         debes confirmar con un clic. Despues de esa unica confirmacion, todos
+         los envios futuros llegan directo a tu correo sin pasos adicionales. -->
+    <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/alexenamoradocaballero+fotografia@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="Nuevo mensaje desde aluk.raw">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -1300,7 +1301,6 @@ p{ margin:0; }
         <textarea id="message" name="message" rows="5" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary">enviar mensaje</button>
-      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
@@ -1617,33 +1617,14 @@ p{ margin:0; }
   });
 
   /* ---------- formulario de contacto ----------
-     Envia de verdad via FormSubmit (formsubmit.co), sin backend propio.
-     Nota: el primer envio activa una confirmacion por correo que hay
-     que aceptar una sola vez (ver comentario junto al <form>). */
+     Envio nativo del navegador directo a FormSubmit (ver el "action" en el
+     <form>) — sin fetch ni JS de por medio, para que sea el flujo base que
+     FormSubmit garantiza. Solo mostramos el mensaje nativo de "campo
+     requerido" del navegador si falta algo; el resto lo maneja el <form>. */
   var contactForm = document.getElementById('contact-form');
-  var formStatus = document.getElementById('form-status');
   var contactSubmitBtn = contactForm.querySelector('button[type="submit"]');
-  contactForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(!contactForm.checkValidity()){
-      contactForm.reportValidity();
-      return;
-    }
+  contactForm.addEventListener('submit', function(){
     contactSubmitBtn.disabled = true;
-    formStatus.textContent = 'Enviando...';
-    fetch(contactForm.action, {
-      method: 'POST',
-      body: new FormData(contactForm),
-      headers: { 'Accept': 'application/json' }
-    }).then(function(response){
-      if(!response.ok) throw new Error('respuesta no valida');
-      formStatus.textContent = 'Mensaje enviado. Te responderé muy pronto, ¡gracias por escribir!';
-      contactForm.reset();
-    }).catch(function(){
-      formStatus.textContent = 'No se pudo enviar. Escribime directo por whatsapp o correo, por favor.';
-    }).finally(function(){
-      contactSubmitBtn.disabled = false;
-    });
   });
 
 })();
