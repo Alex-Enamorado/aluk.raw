@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>aluk.raw — Fotografía y Videografía</title>
+<meta name="description" content="aluk.raw — Fotografía y videografía con mirada natural y cinematográfica. Portafolio de retrato, eventos, naturaleza, producto y piezas audiovisuales.">
+<meta name="theme-color" content="#0b1a16">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="aluk.raw">
+<meta property="og:title" content="aluk.raw — Fotografía y Videografía">
+<meta property="og:description" content="Portafolio de fotografía y videografía con mirada natural y cinematográfica.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="aluk.raw — Fotografía y Videografía">
+<meta name="twitter:description" content="Portafolio de fotografía y videografía con mirada natural y cinematográfica.">
+
+<!-- Favicon simple (circulo verde) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232d8956'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23f6f8f5'/%3E%3C/svg%3E">
+
+<!-- Inter (Google Fonts) — usada para parrafos, formulario, numeros y cualquier texto con acentos/enie -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   FUENTE PRINCIPAL: DeFonte reduced (ingoFonts)
+   -----------------------------------------------------------
+   Coloca aqui los 4 archivos de la fuente, en una carpeta
+   "fonts" al lado de este archivo index.html:
+     fonts/DeFonte-reduced-Leger.ttf     (peso 300)
+     fonts/DeFonte-reduced-Normale.ttf   (peso 400)
+     fonts/DeFonte-reduced-DemiGras.ttf  (peso 600)
+     fonts/DeFonte-reduced-Gros.ttf      (peso 800)
+
+   Los 4 archivos comparten el mismo font-family ("DeFonte
+   reduced") pero distinto font-weight: el navegador elige el
+   archivo correcto segun el font-weight que se use en el CSS.
+
+   IMPORTANTE: esta fuente reducida solo trae minusculas a-z
+   (sin numeros, tildes, ene-con-virgulilla ni puntuacion).
+   Por eso se usa unicamente en logo, titulos (h1/h2), botones
+   y etiquetas cortas — siempre en minusculas y sin acentos.
+   Para parrafos, formulario, numeros y textos con acentos se
+   usa Inter, que cae automaticamente como respaldo caracter
+   por caracter si un simbolo no existe en DeFonte reduced.
+   ========================================================= */
+@font-face {
+  font-family: 'DeFonte reduced';
+  src: url('fonts/DeFonte-reduced-Leger.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DeFonte reduced';
+  src: url('fonts/DeFonte-reduced-Normale.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DeFonte reduced';
+  src: url('fonts/DeFonte-reduced-DemiGras.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DeFonte reduced';
+  src: url('fonts/DeFonte-reduced-Gros.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================
+   VARIABLES / TOKENS
+   ========================================================= */
+:root{
+  /* paleta de marca */
+  --verde-profundo:#005950;
+  --verde-bosque:#026747;
+  --verde-hoja:#2d8956;
+  --verde-salvia:#378b7b;
+  --blanco-calido:#f6f8f5;
+  --negro-verdoso:#0b1a16;
+
+  /* tipografia */
+  --font-display:'DeFonte reduced','Inter','Helvetica Neue',Arial,sans-serif;
+  --font-body:'Inter','Helvetica Neue',Arial,sans-serif;
+
+  /* radios y espaciados */
+  --radius-lg:28px;
+  --radius-md:18px;
+  --radius-sm:12px;
+  --radius-pill:999px;
+  --container:1200px;
+  --header-h:4.75rem;
+
+  /* transiciones */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --t-fast:300ms;
+  --t-slow:500ms;
+
+  color-scheme: dark;
+  /* tema oscuro (por defecto) */
+  --bg:var(--negro-verdoso);
+  --bg-elevated:#10241f;
+  --bg-elevated-2:#143028;
+  --text:var(--blanco-calido);
+  --text-muted:#c3d1cb;
+  --accent:var(--verde-hoja);
+  --accent-strong:var(--verde-bosque);
+  --border:rgba(55,139,123,.28);
+  --header-bg:rgba(11,26,22,.72);
+  --glow-color:45,137,86;
+}
+
+:root[data-theme="light"]{
+  color-scheme: light;
+  --bg:var(--blanco-calido);
+  --bg-elevated:#ffffff;
+  --bg-elevated-2:#eef3ef;
+  --text:var(--negro-verdoso);
+  --text-muted:#3f5a51;
+  --accent:var(--verde-bosque);
+  --accent-strong:var(--verde-profundo);
+  --border:rgba(2,103,71,.18);
+  --header-bg:rgba(246,248,245,.75);
+  --glow-color:2,103,71;
+}
+
+/* =========================================================
+   RESET BASE
+   ========================================================= */
+*,*::before,*::after{ box-sizing:border-box; }
+html{
+  scroll-padding-top:5.5rem;
+  -webkit-text-size-adjust:100%;
+}
+@media (prefers-reduced-motion: no-preference){
+  html{ scroll-behavior:smooth; }
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background var(--t-slow) var(--ease), color var(--t-slow) var(--ease);
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+ul{ list-style:none; margin:0; padding:0; }
+input,select,textarea{ font:inherit; color:inherit; }
+h1,h2,h3{ margin:0; }
+p{ margin:0; }
+
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:1.25rem;
+}
+
+/* enlace de accesibilidad "saltar al contenido" */
+.skip-link{
+  position:absolute;
+  left:1rem; top:-4rem;
+  background:var(--accent-strong);
+  color:var(--blanco-calido);
+  padding:.75rem 1.25rem;
+  border-radius:var(--radius-sm);
+  z-index:1000;
+  transition:top var(--t-fast) var(--ease);
+}
+.skip-link:focus{ top:1rem; }
+
+/* =========================================================
+   TIPOGRAFIA COMPARTIDA
+   ========================================================= */
+.eyebrow{
+  font-family:var(--font-display);
+  font-weight:400;
+  letter-spacing:.14em;
+  text-transform:lowercase;
+  font-size:.8rem;
+  color:var(--accent);
+}
+.section-title{
+  font-family:var(--font-display);
+  font-weight:800;
+  text-transform:lowercase;
+  font-size:clamp(2.1rem, 5vw, 3.4rem);
+  line-height:1.05;
+  margin-top:.5rem;
+  letter-spacing:-.01em;
+}
+.section-lead{
+  max-width:42rem;
+  margin-top:1rem;
+  color:var(--text-muted);
+  font-size:1.05rem;
+}
+.glow{
+  text-shadow:
+    0 0 18px rgba(var(--glow-color),.55),
+    0 0 46px rgba(var(--glow-color),.35),
+    0 0 90px rgba(var(--glow-color),.2);
+}
+
+/* enfoque de titulos al aparecer (desenfocado -> nitido) */
+[data-reveal="focus"]{ filter: blur(10px); opacity:0; transform:translateY(18px); }
+[data-reveal="focus"].is-visible{
+  filter: blur(0); opacity:1; transform:translateY(0);
+  transition: filter var(--t-slow) var(--ease), opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+}
+.reveal{ opacity:0; transform:translateY(22px); }
+.reveal.is-visible{
+  opacity:1; transform:translateY(0);
+  transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+}
+@media (prefers-reduced-motion: reduce){
+  [data-reveal="focus"], .reveal{ opacity:1; transform:none; filter:none; }
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  font-family:var(--font-display);
+  font-weight:600;
+  text-transform:lowercase;
+  font-size:1rem;
+  padding:.95rem 1.9rem;
+  border-radius:var(--radius-pill);
+  transition:transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  white-space:nowrap;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); }
+.btn-primary{
+  background:var(--accent-strong);
+  color:var(--blanco-calido);
+  box-shadow:0 10px 30px -10px rgba(var(--glow-color),.6);
+}
+.btn-primary:hover{ background:var(--accent); box-shadow:0 14px 36px -8px rgba(var(--glow-color),.75); }
+.btn-outline{
+  background:transparent;
+  color:var(--text);
+  border:1.5px solid var(--border);
+}
+.btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
+.btn-whatsapp{
+  background:var(--verde-hoja);
+  color:var(--blanco-calido);
+  margin-top:1.5rem;
+}
+.btn-whatsapp:hover{ background:var(--verde-bosque); }
+.btn-whatsapp svg{ width:1.2rem; height:1.2rem; }
+
+.icon-btn{
+  width:2.6rem; height:2.6rem;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:50%;
+  color:var(--text);
+  transition:background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.icon-btn:hover{ background:var(--bg-elevated-2); color:var(--accent); }
+.icon-btn svg{ width:1.3rem; height:1.3rem; }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header{
+  position:fixed;
+  inset:0 0 auto 0;
+  height:var(--header-h);
+  z-index:200;
+  background:var(--header-bg);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--t-fast) var(--ease), background var(--t-slow) var(--ease);
+}
+.site-header.is-scrolled{ border-bottom-color:var(--border); }
+.header-inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+.logo{
+  font-family:var(--font-display);
+  font-size:1.5rem;
+  display:inline-flex;
+  align-items:baseline;
+  gap:.05em;
+}
+.logo-aluk{ font-weight:300; color:var(--text); }
+.logo-raw{ font-weight:800; color:var(--accent); text-shadow:0 0 14px rgba(var(--glow-color),.5); }
+.logo.small{ font-size:1.15rem; }
+
+.main-nav ul{ display:flex; gap:2rem; }
+.nav-link{
+  font-family:var(--font-display);
+  font-weight:400;
+  text-transform:lowercase;
+  font-size:.95rem;
+  color:var(--text-muted);
+  position:relative;
+  padding-block:.35rem;
+  transition:color var(--t-fast) var(--ease);
+}
+.nav-link::after{
+  content:'';
+  position:absolute; left:0; right:100%; bottom:0;
+  height:2px; background:var(--accent);
+  transition:right var(--t-fast) var(--ease);
+  border-radius:var(--radius-pill);
+}
+.nav-link:hover, .nav-link.active-link{ color:var(--text); }
+.nav-link:hover::after, .nav-link.active-link::after{ right:0; }
+
+.header-actions{ display:flex; align-items:center; gap:.5rem; }
+
+.hamburger{
+  width:2.6rem; height:2.6rem;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.32rem;
+  border-radius:50%;
+}
+.hamburger:hover{ background:var(--bg-elevated-2); }
+.hamburger span{
+  width:1.35rem; height:2px;
+  background:var(--text);
+  border-radius:var(--radius-pill);
+  transition:transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease);
+}
+.hamburger.is-active span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.hamburger.is-active span:nth-child(2){ opacity:0; }
+.hamburger.is-active span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+@media (max-width:860px){
+  .hamburger{ display:flex; }
+  .main-nav{
+    position:fixed;
+    inset:var(--header-h) 0 0 0;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-12px);
+    transition:opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), visibility var(--t-fast);
+  }
+  .main-nav.is-open{ opacity:1; visibility:visible; transform:translateY(0); }
+  .main-nav ul{ flex-direction:column; align-items:center; gap:2.2rem; }
+  .nav-link{ font-size:1.6rem; }
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  padding-top:var(--header-h);
+}
+.hero-media{ position:absolute; inset:0; z-index:0; }
+.hero-image{
+  width:100%; height:100%; object-fit:cover;
+  filter:saturate(1.05) brightness(.85);
+}
+.hero-gradient{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(11,26,22,.55) 0%, rgba(11,26,22,.35) 35%, rgba(11,26,22,.92) 100%),
+    linear-gradient(0deg, var(--negro-verdoso) 0%, transparent 30%);
+}
+.hero-grain{
+  position:absolute; inset:0;
+  opacity:.06;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-bloom{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(90px);
+  pointer-events:none;
+  mix-blend-mode:screen;
+  opacity:.55;
+}
+.bloom-1{ width:26rem; height:26rem; top:-6rem; right:-6rem; background:radial-gradient(circle, var(--verde-hoja), transparent 70%); }
+.bloom-2{ width:20rem; height:20rem; bottom:8%; left:-4rem; background:radial-gradient(circle, var(--verde-salvia), transparent 70%); }
+
+.hero-content{ position:relative; z-index:1; padding-block:4rem 5rem; }
+.hero-title{
+  font-family:var(--font-display);
+  font-weight:800;
+  text-transform:lowercase;
+  font-size:clamp(3rem, 11vw, 7rem);
+  line-height:.94;
+  letter-spacing:-.02em;
+  color:var(--blanco-calido);
+  margin-top:1rem;
+}
+.hero-subtitle{
+  margin-top:1.5rem;
+  max-width:34rem;
+  font-size:1.1rem;
+  color:var(--text-muted);
+}
+.hero-actions{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.25rem; }
+
+.scroll-cue{
+  position:absolute; z-index:1; bottom:1.75rem; left:50%; transform:translateX(-50%);
+  width:2.5rem; height:2.5rem;
+  border-radius:50%;
+  border:1.5px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  animation:bob 2.4s ease-in-out infinite;
+}
+.scroll-cue svg{ width:1.1rem; height:1.1rem; }
+@keyframes bob{ 0%,100%{ transform:translate(-50%,0); } 50%{ transform:translate(-50%,8px); } }
+@media (prefers-reduced-motion: reduce){ .scroll-cue{ animation:none; } }
+
+/* =========================================================
+   SECCIONES GENERICAS
+   ========================================================= */
+.section{ position:relative; padding-block:6rem; }
+.section-alt{ background:var(--bg-elevated); }
+.section::before{
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(38rem 26rem at 88% 0%, rgba(var(--glow-color),.10), transparent 60%),
+    radial-gradient(30rem 22rem at 4% 100%, rgba(55,139,123,.10), transparent 60%);
+  pointer-events:none;
+}
+.section > .container{ position:relative; z-index:1; }
+
+/* =========================================================
+   FILTROS + GALERIA (masonry)
+   ========================================================= */
+.filters{
+  display:flex; flex-wrap:wrap; gap:.75rem;
+  margin-top:2.25rem;
+}
+.filter-btn{
+  font-family:var(--font-display);
+  font-weight:400;
+  text-transform:lowercase;
+  font-size:.9rem;
+  padding:.6rem 1.25rem;
+  border-radius:var(--radius-pill);
+  border:1.5px solid var(--border);
+  color:var(--text-muted);
+  transition:all var(--t-fast) var(--ease);
+}
+.filter-btn:hover{ color:var(--text); border-color:var(--accent); }
+.filter-btn.is-active{ background:var(--accent-strong); border-color:var(--accent-strong); color:var(--blanco-calido); }
+
+.masonry{
+  column-count:1;
+  column-gap:1.1rem;
+  margin-top:2.5rem;
+}
+@media (min-width:640px){ .masonry{ column-count:2; } }
+@media (min-width:1024px){ .masonry{ column-count:3; } }
+
+.gallery-item{
+  break-inside:avoid;
+  margin:0 0 1.1rem;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.gallery-item.is-hidden{ display:none; }
+.gallery-item.fade-in{ animation:fadeInUp .45s var(--ease) both; }
+@keyframes fadeInUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+
+.gallery-trigger{ position:relative; display:block; width:100%; border-radius:var(--radius-lg); overflow:hidden; }
+.gallery-trigger img{
+  width:100%; height:auto;
+  filter:blur(1.5px) saturate(.88) brightness(.94);
+  transform:scale(1.04);
+  transition:filter var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+}
+.gallery-trigger:hover img, .gallery-trigger:focus-visible img{
+  filter:blur(0) saturate(1) brightness(1);
+  transform:scale(1.0);
+}
+.gallery-overlay{
+  position:absolute; inset:0;
+  display:flex; align-items:flex-end;
+  padding:1.1rem;
+  background:linear-gradient(180deg, transparent 45%, rgba(2,26,19,.85) 100%);
+  opacity:0;
+  transition:opacity var(--t-fast) var(--ease);
+}
+.gallery-trigger:hover .gallery-overlay, .gallery-trigger:focus-visible .gallery-overlay{ opacity:1; }
+.gallery-overlay-title{
+  font-family:var(--font-display);
+  font-weight:600;
+  text-transform:lowercase;
+  color:var(--blanco-calido);
+  font-size:1.05rem;
+}
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+.lightbox{
+  position:fixed; inset:0; z-index:500;
+  background:rgba(6,15,12,.92);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:1.5rem;
+}
+.lightbox[hidden]{ display:none; }
+.lightbox-image{
+  max-width:min(92vw, 68rem);
+  max-height:78vh;
+  border-radius:var(--radius-md);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+}
+.lightbox-caption{
+  position:absolute; bottom:2.5rem; left:0; right:0;
+  text-align:center;
+  color:var(--blanco-calido);
+  font-family:var(--font-body);
+}
+.lightbox-close, .lightbox-prev, .lightbox-next{
+  position:absolute;
+  width:3rem; height:3rem;
+  border-radius:50%;
+  background:rgba(246,248,245,.08);
+  color:var(--blanco-calido);
+  display:flex; align-items:center; justify-content:center;
+  transition:background var(--t-fast) var(--ease);
+}
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:rgba(246,248,245,.18); }
+.lightbox-close{ top:1.5rem; right:1.5rem; }
+.lightbox-prev{ left:1.5rem; top:50%; transform:translateY(-50%); }
+.lightbox-next{ right:1.5rem; top:50%; transform:translateY(-50%); }
+.lightbox-close svg, .lightbox-prev svg, .lightbox-next svg{ width:1.4rem; height:1.4rem; }
+@media (max-width:640px){
+  .lightbox-prev{ left:.5rem; } .lightbox-next{ right:.5rem; }
+  .lightbox-close{ top:.75rem; right:.75rem; }
+}
+
+/* =========================================================
+   VIDEOGRAFIA
+   ========================================================= */
+.video-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+  margin-top:2.5rem;
+}
+@media (min-width:640px){ .video-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px){ .video-grid{ grid-template-columns:repeat(3,1fr); } }
+
+.video-card{
+  background:var(--bg-elevated);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  transition:transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.video-card:hover{ transform:translateY(-4px); box-shadow:0 20px 44px -18px rgba(var(--glow-color),.4); }
+.video-trigger{ position:relative; display:block; width:100%; aspect-ratio:16/10; overflow:hidden; }
+.video-trigger img{
+  width:100%; height:100%; object-fit:cover;
+  filter:blur(2px) brightness(.88);
+  transform:scale(1.03);
+  transition:filter var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+}
+.video-trigger:hover img, .video-trigger:focus-visible img{ filter:blur(0) brightness(1); transform:scale(1); }
+.play-icon{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.play-icon span{
+  width:4rem; height:4rem;
+  border-radius:50%;
+  background:rgba(246,248,245,.14);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  transition:background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.video-trigger:hover .play-icon span{ background:var(--accent-strong); transform:scale(1.08); }
+.play-icon svg{ width:1.6rem; height:1.6rem; color:var(--blanco-calido); margin-left:3px; }
+.video-info{ padding:1.35rem; }
+.video-info h3{
+  font-family:var(--font-display);
+  font-weight:600;
+  text-transform:lowercase;
+  font-size:1.15rem;
+}
+.video-info p{ margin-top:.4rem; color:var(--text-muted); font-size:.9rem; }
+
+/* modal de video */
+.video-modal{
+  position:fixed; inset:0; z-index:500;
+  background:rgba(6,15,12,.92);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:1.25rem;
+}
+.video-modal[hidden]{ display:none; }
+.video-modal-inner{ position:relative; width:min(92vw,64rem); }
+.video-modal-frame{ position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius-md); overflow:hidden; background:#000; }
+.video-modal-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-modal-close{
+  position:absolute; top:-3.25rem; right:0;
+  width:2.75rem; height:2.75rem; border-radius:50%;
+  background:rgba(246,248,245,.1); color:var(--blanco-calido);
+  display:flex; align-items:center; justify-content:center;
+}
+.video-modal-close:hover{ background:rgba(246,248,245,.2); }
+.video-modal-close svg{ width:1.3rem; height:1.3rem; }
+
+/* =========================================================
+   SOBRE MI
+   ========================================================= */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:3rem;
+  align-items:center;
+}
+@media (min-width:900px){ .about-grid{ grid-template-columns:.85fr 1fr; } }
+.about-media img{
+  border-radius:var(--radius-lg);
+  filter:saturate(1.03);
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.5);
+}
+.about-content p{ margin-top:1.1rem; color:var(--text-muted); max-width:34rem; }
+.stats{ display:flex; flex-wrap:wrap; gap:2.5rem; margin-top:2.5rem; }
+.stat-number{
+  display:block;
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:2.6rem;
+  color:var(--accent);
+  text-shadow:0 0 24px rgba(var(--glow-color),.35);
+}
+.stat-label{
+  font-family:var(--font-body);
+  font-size:.9rem;
+  color:var(--text-muted);
+}
+
+/* =========================================================
+   SERVICIOS
+   ========================================================= */
+.services-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+  margin-top:2.5rem;
+}
+@media (min-width:640px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px){ .services-grid{ grid-template-columns:repeat(4,1fr); } }
+.service-card{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2rem 1.6rem;
+  transition:transform var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.service-card:hover{ transform:translateY(-6px); border-color:var(--accent); box-shadow:0 20px 40px -22px rgba(var(--glow-color),.5); }
+.service-icon{
+  width:3.4rem; height:3.4rem;
+  border-radius:50%;
+  background:var(--bg-elevated-2);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--accent);
+}
+.service-icon svg{ width:1.6rem; height:1.6rem; }
+.service-card h3{
+  margin-top:1.4rem;
+  font-family:var(--font-display);
+  font-weight:600;
+  text-transform:lowercase;
+  font-size:1.2rem;
+}
+.service-card p{ margin-top:.6rem; color:var(--text-muted); font-size:.92rem; }
+
+/* =========================================================
+   CONTACTO
+   ========================================================= */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:3rem;
+}
+@media (min-width:900px){ .contact-grid{ grid-template-columns:.9fr 1.1fr; } }
+.contact-info p{ margin-top:1.1rem; color:var(--text-muted); max-width:30rem; }
+.social-list{ display:flex; gap:.9rem; margin-top:2rem; }
+.social-list a{
+  width:2.75rem; height:2.75rem;
+  border-radius:50%;
+  border:1.5px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.social-list a:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-3px); }
+.social-list svg{ width:1.2rem; height:1.2rem; }
+.social-list.small a{ width:2.3rem; height:2.3rem; border-color:rgba(246,248,245,.25); color:var(--blanco-calido); }
+
+.contact-form{
+  background:var(--bg-elevated);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+}
+.form-row{ display:flex; flex-direction:column; gap:.5rem; }
+.form-row label{
+  font-family:var(--font-display);
+  font-weight:400;
+  text-transform:lowercase;
+  font-size:.85rem;
+  color:var(--text-muted);
+}
+.form-row input, .form-row select, .form-row textarea{
+  background:var(--bg);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:.85rem 1rem;
+  color:var(--text);
+  resize:vertical;
+  transition:border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(var(--glow-color),.18);
+}
+.contact-form .btn{ align-self:flex-start; margin-top:.25rem; }
+.form-status{ font-size:.9rem; color:var(--accent); min-height:1.2em; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{
+  background:var(--verde-profundo);
+  color:var(--blanco-calido);
+  padding-block:2.75rem;
+}
+.footer-inner{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+}
+.footer-inner p{ font-size:.85rem; color:rgba(246,248,245,.75); }
+
+/* =========================================================
+   CURSOR PERSONALIZADO (solo escritorio)
+   ========================================================= */
+.cursor-glow{
+  position:fixed;
+  top:0; left:0;
+  width:2.2rem; height:2.2rem;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(var(--glow-color),.55), transparent 70%);
+  filter:blur(2px);
+  pointer-events:none;
+  z-index:999;
+  transform:translate(-50%,-50%);
+  opacity:0;
+  transition:opacity var(--t-fast) var(--ease), width var(--t-fast) var(--ease), height var(--t-fast) var(--ease);
+  mix-blend-mode:screen;
+}
+.cursor-glow.is-active{ opacity:1; }
+.cursor-glow.is-hovering{ width:3.4rem; height:3.4rem; }
+@media (hover:none), (pointer:coarse){ .cursor-glow{ display:none; } }
+</style>
+</head>
+<body>
+
+<a href="#contenido" class="skip-link">saltar al contenido principal</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="#inicio" class="logo" aria-label="aluk.raw, inicio">
+      <span class="logo-aluk">aluk</span><span class="logo-raw">.raw</span>
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label="navegacion principal">
+      <ul>
+        <li><a href="#inicio" class="nav-link">inicio</a></li>
+        <li><a href="#fotografia" class="nav-link">fotografia</a></li>
+        <li><a href="#videografia" class="nav-link">videografia</a></li>
+        <li><a href="#sobre-mi" class="nav-link">sobre mi</a></li>
+        <li><a href="#contacto" class="nav-link">contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="cambiar a modo claro" aria-pressed="false">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
+        </svg>
+      </button>
+      <button class="hamburger" id="menu-toggle" aria-label="abrir menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="inicio">
+  <div class="hero-media" aria-hidden="true">
+    <!-- TODO: reemplaza esta imagen por tu propio video o foto de fondo.
+         Para usar video: <video class="hero-image" autoplay muted loop playsinline poster="..."><source src="videos/hero.mp4" type="video/mp4"></video> -->
+    <img class="hero-image" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&q=80" alt="" loading="eager">
+    <div class="hero-grain"></div>
+    <div class="hero-bloom bloom-1"></div>
+    <div class="hero-bloom bloom-2"></div>
+    <div class="hero-gradient"></div>
+  </div>
+
+  <div class="container hero-content">
+    <p class="eyebrow reveal">fotografia · video · edicion</p>
+    <h1 class="hero-title" data-reveal="focus">capturando<br><span class="glow">lo real</span></h1>
+    <p class="hero-subtitle reveal">Fotografía y video con mirada natural: capturo momentos reales, con luz honesta y una estética cinematográfica.</p>
+    <div class="hero-actions reveal">
+      <a href="#fotografia" class="btn btn-primary">ver portafolio</a>
+      <a href="#contacto" class="btn btn-outline">contactame</a>
+    </div>
+  </div>
+
+  <a href="#fotografia" class="scroll-cue" aria-label="desplazarse hacia la seccion de fotografia">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+  </a>
+</section>
+
+<!-- ===================== FOTOGRAFIA ===================== -->
+<section class="section" id="fotografia">
+  <div class="container">
+    <p class="eyebrow reveal">portafolio</p>
+    <h2 class="section-title" data-reveal="focus">fotografia</h2>
+    <p class="section-lead reveal">Una selección de trabajos recientes en naturaleza, retrato, eventos y producto — luz natural y composición honesta.</p>
+
+    <div class="filters reveal" role="group" aria-label="filtrar galeria por categoria">
+      <button class="filter-btn is-active" data-filter="todas">todas</button>
+      <button class="filter-btn" data-filter="naturaleza">naturaleza</button>
+      <button class="filter-btn" data-filter="retrato">retrato</button>
+      <button class="filter-btn" data-filter="eventos">eventos</button>
+      <button class="filter-btn" data-filter="producto">producto</button>
+    </div>
+
+    <!-- TODO: reemplaza cada imagen por tus propias fotos. Mantén data-category y data-caption -->
+    <div class="masonry" id="gallery">
+
+      <figure class="gallery-item reveal" data-category="naturaleza">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80" data-caption="Bosque en calma">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=700&q=75" alt="Bosque en calma, luz filtrada entre los arboles" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">bosque en calma</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="retrato">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1600&q=80" data-caption="Retrato natural">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=75" alt="Retrato con luz natural" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">retrato natural</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="eventos">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" data-caption="Celebracion al aire libre">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=75" alt="Celebracion al aire libre" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">celebracion al aire libre</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="producto">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=1600&q=80" data-caption="Producto minimalista">
+          <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=700&q=75" alt="Composicion de producto minimalista" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">producto minimalista</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="naturaleza">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1600&q=80" data-caption="Cumbres al amanecer">
+          <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=700&q=75" alt="Cumbres al amanecer" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">cumbres al amanecer</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="retrato">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=1600&q=80" data-caption="Mirada al atardecer">
+          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=700&q=75" alt="Retrato al atardecer" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">mirada al atardecer</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="eventos">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80" data-caption="Brindis">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=75" alt="Brindis en un evento" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">brindis</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="producto">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=1600&q=80" data-caption="Detalle de textura">
+          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=700&q=75" alt="Detalle de textura de producto" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">detalle de textura</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="naturaleza">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80" data-caption="Sendero entre montanas">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=75" alt="Sendero entre montanas" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">sendero entre montanas</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="retrato">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=80" data-caption="Luz lateral">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=75" alt="Retrato con luz lateral" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">luz lateral</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="eventos">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80" data-caption="Ceremonia">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=700&q=75" alt="Ceremonia" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">ceremonia</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="producto">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=1600&q=80" data-caption="Composicion de estudio">
+          <img src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=700&q=75" alt="Composicion de estudio" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">composicion de estudio</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="naturaleza">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=1600&q=80" data-caption="Luz entre los arboles">
+          <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=700&q=75" alt="Luz entre los arboles" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">luz entre los arboles</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="retrato">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=1600&q=80" data-caption="Retrato urbano">
+          <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=700&q=75" alt="Retrato urbano" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">retrato urbano</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="eventos">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=1600&q=80" data-caption="Fiesta nocturna">
+          <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=700&q=75" alt="Fiesta nocturna" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">fiesta nocturna</span></span>
+        </button>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="producto">
+        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?auto=format&fit=crop&w=1600&q=80" data-caption="Luz de producto">
+          <img src="https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?auto=format&fit=crop&w=700&q=75" alt="Iluminacion de producto" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">luz de producto</span></span>
+        </button>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VIDEOGRAFIA ===================== -->
+<section class="section section-alt" id="videografia">
+  <div class="container">
+    <p class="eyebrow reveal">reel</p>
+    <h2 class="section-title" data-reveal="focus">videografia</h2>
+    <p class="section-lead reveal">Piezas audiovisuales breves, con ritmo natural y una estética cálida, pensadas para contar lo esencial.</p>
+
+    <!-- TODO: cambia data-embed por la URL de embed real (YouTube/Vimeo) de cada video -->
+    <div class="video-grid" id="video-grid">
+
+      <article class="video-card reveal">
+        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: raices">
+          <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <span class="play-icon"><span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          </span></span>
+        </button>
+        <div class="video-info">
+          <h3>raices</h3>
+          <p>documental · 2024</p>
+        </div>
+      </article>
+
+      <article class="video-card reveal">
+        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: entre mareas">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <span class="play-icon"><span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          </span></span>
+        </button>
+        <div class="video-info">
+          <h3>entre mareas</h3>
+          <p>publicidad · 2023</p>
+        </div>
+      </article>
+
+      <article class="video-card reveal">
+        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: vuelo bajo">
+          <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <span class="play-icon"><span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          </span></span>
+        </button>
+        <div class="video-info">
+          <h3>vuelo bajo</h3>
+          <p>drone · 2024</p>
+        </div>
+      </article>
+
+      <article class="video-card reveal">
+        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: camino verde">
+          <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <span class="play-icon"><span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          </span></span>
+        </button>
+        <div class="video-info">
+          <h3>camino verde</h3>
+          <p>musical · 2022</p>
+        </div>
+      </article>
+
+      <article class="video-card reveal">
+        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: retratos de oficio">
+          <img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <span class="play-icon"><span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          </span></span>
+        </button>
+        <div class="video-info">
+          <h3>retratos de oficio</h3>
+          <p>documental · 2023</p>
+        </div>
+      </article>
+
+      <article class="video-card reveal">
+        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: horizonte">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy">
+          <span class="play-icon"><span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          </span></span>
+        </button>
+        <div class="video-info">
+          <h3>horizonte</h3>
+          <p>publicidad · 2025</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SOBRE MI ===================== -->
+<section class="section" id="sobre-mi">
+  <div class="container about-grid">
+    <div class="about-media reveal">
+      <!-- TODO: reemplaza por tu propia foto -->
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Fotografo trabajando con su camara al aire libre" loading="lazy">
+    </div>
+    <div class="about-content">
+      <p class="eyebrow reveal">quien soy</p>
+      <h2 class="section-title" data-reveal="focus">sobre mi</h2>
+      <p class="reveal">Soy fotógrafo y videógrafo, y llevo más de siete años contando historias con luz natural. Me interesa lo real: los gestos espontáneos, los paisajes sin retocar y los momentos que no se repiten.</p>
+      <p class="reveal">Trabajo cerca de mis clientes, desde la primera idea hasta la entrega final, cuidando cada detalle técnico sin perder la espontaneidad de lo vivido.</p>
+
+      <div class="stats">
+        <div class="stat reveal">
+          <span class="stat-number" data-target="180">0</span>
+          <span class="stat-label">proyectos</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-number" data-target="64">0</span>
+          <span class="stat-label">clientes</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-number" data-target="7">0</span>
+          <span class="stat-label">años de experiencia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICIOS ===================== -->
+<section class="section section-alt" id="servicios">
+  <div class="container">
+    <p class="eyebrow reveal">lo que ofrezco</p>
+    <h2 class="section-title" data-reveal="focus">servicios</h2>
+
+    <div class="services-grid">
+      <article class="service-card reveal">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1-1.6h5.8l1 1.6h1.6A2.5 2.5 0 0 1 20 8.5v9A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5z"></path>
+            <circle cx="12" cy="13" r="3.6"></circle>
+          </svg>
+        </span>
+        <h3>fotografia</h3>
+        <p>Sesiones de retrato, producto, naturaleza y eventos, con edición cuidada y entrega en alta resolución.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="7" width="12" height="10" rx="2.4"></rect>
+            <path d="M15 10.3l5.2-2.8v9l-5.2-2.8"></path>
+          </svg>
+        </span>
+        <h3>videografia</h3>
+        <p>Piezas documentales, comerciales y de eventos, grabadas en formato cinematográfico.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 5v6M6 15v4M12 5v3M12 12v7M18 5v10M18 19v0"></path>
+            <circle cx="6" cy="13" r="2"></circle>
+            <circle cx="12" cy="9.5" r="2"></circle>
+            <circle cx="18" cy="17" r="2"></circle>
+          </svg>
+        </span>
+        <h3>edicion</h3>
+        <p>Color, ritmo y sonido: llevo cada proyecto desde el material crudo hasta la entrega final.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="2.2"></circle>
+            <circle cx="18" cy="6" r="2.2"></circle>
+            <circle cx="6" cy="18" r="2.2"></circle>
+            <circle cx="18" cy="18" r="2.2"></circle>
+            <path d="M7.6 7.6L10.5 10.5M16.4 7.6L13.5 10.5M7.6 16.4L10.5 13.5M16.4 16.4L13.5 13.5"></path>
+            <rect x="10" y="10" width="4" height="4" rx="1"></rect>
+          </svg>
+        </span>
+        <h3>drone</h3>
+        <p>Tomas aéreas para paisajes, eventos y proyectos comerciales, con piloto certificado.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACTO ===================== -->
+<section class="section" id="contacto">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <p class="eyebrow">hablemos</p>
+      <h2 class="section-title" data-reveal="focus">contacto</h2>
+      <p>Cuéntame sobre tu proyecto y te responderé en menos de 48 horas con una propuesta a tu medida.</p>
+
+      <!-- TODO: reemplaza el numero por tu numero real de WhatsApp (formato internacional, sin +) -->
+      <a class="btn btn-whatsapp" href="https://wa.me/50000000000?text=Hola%2C%20quiero%20cotizar%20un%20proyecto" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20l1.4-4.2A7.8 7.8 0 1 1 8.6 19z"></path>
+          <path d="M9 10c0 3 2 5 5 5"></path>
+        </svg>
+        escribime por whatsapp
+      </a>
+
+      <!-- TODO: reemplaza los "#" por los enlaces reales a tus redes -->
+      <ul class="social-list">
+        <li><a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17" cy="7" r="1"></circle></svg>
+        </a></li>
+        <li><a href="#" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="4"></rect><path d="M10.5 9.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none"></path></svg>
+        </a></li>
+        <li><a href="#" aria-label="Vimeo" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.6c1.7-.2 3 .6 3.6 2.2.5 1.3.8 2.5 1.4 4.4.7 2.1 1.4 2.7 2.1 2.7 1.3 0 2.6-2.4 2.9-4.1.3-1.9-.5-2.4-1.7-1.9-.2-1.7 1.4-4.6 4-4.5 2 .1 2.8 1.5 2.6 3.5-.3 3-3.7 7.6-6.8 7.6-3 0-3.9-3.2-4.8-6.4-.6-2.1-1.1-3.4-2.3-3.1z"></path></svg>
+        </a></li>
+      </ul>
+    </div>
+
+    <!-- TODO: conecta este formulario a tu backend/servicio de envio (ej. Formspree, EmailJS, tu propio endpoint) -->
+    <form class="contact-form reveal" id="contact-form" novalidate>
+      <div class="form-row">
+        <label for="name">nombre</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
+      </div>
+      <div class="form-row">
+        <label for="email">correo electronico</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+      <div class="form-row">
+        <label for="project-type">tipo de proyecto</label>
+        <select id="project-type" name="project-type">
+          <option value="boda">Boda</option>
+          <option value="evento">Evento</option>
+          <option value="retrato">Retrato</option>
+          <option value="producto">Producto</option>
+          <option value="documental">Documental / video</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="message">mensaje</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">enviar mensaje</button>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="#inicio" class="logo small" aria-label="aluk.raw, inicio">
+      <span class="logo-aluk">aluk</span><span class="logo-raw">.raw</span>
+    </a>
+    <p>&copy; <span id="year"></span> aluk.raw — todos los derechos reservados</p>
+    <ul class="social-list small">
+      <li><a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17" cy="7" r="1"></circle></svg>
+      </a></li>
+      <li><a href="#" aria-label="YouTube" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="4"></rect><path d="M10.5 9.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none"></path></svg>
+      </a></li>
+      <li><a href="#" aria-label="Vimeo" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.6c1.7-.2 3 .6 3.6 2.2.5 1.3.8 2.5 1.4 4.4.7 2.1 1.4 2.7 2.1 2.7 1.3 0 2.6-2.4 2.9-4.1.3-1.9-.5-2.4-1.7-1.9-.2-1.7 1.4-4.6 4-4.5 2 .1 2.8 1.5 2.6 3.5-.3 3-3.7 7.6-6.8 7.6-3 0-3.9-3.2-4.8-6.4-.6-2.1-1.1-3.4-2.3-3.1z"></path></svg>
+      </a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ===================== LIGHTBOX (fotografia) ===================== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="visor de imagen" hidden>
+  <button class="lightbox-close" id="lightbox-close" aria-label="cerrar visor">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+  </button>
+  <button class="lightbox-prev" id="lightbox-prev" aria-label="imagen anterior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+  </button>
+  <img class="lightbox-image" id="lightbox-image" src="" alt="">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+  <button class="lightbox-next" id="lightbox-next" aria-label="siguiente imagen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg>
+  </button>
+</div>
+
+<!-- ===================== MODAL DE VIDEO ===================== -->
+<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="reproductor de video" hidden>
+  <div class="video-modal-inner">
+    <button class="video-modal-close" id="video-modal-close" aria-label="cerrar video">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+    </button>
+    <div class="video-modal-frame" id="video-modal-frame"></div>
+  </div>
+</div>
+
+<div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- ano del footer ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- tema oscuro/claro ---------- */
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('theme-toggle');
+  var themeIcon = document.getElementById('theme-icon');
+  var MOON_PATH = '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path>';
+  var SUN_PATH = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>';
+
+  function applyTheme(theme){
+    if(theme === 'light'){
+      root.setAttribute('data-theme','light');
+      themeIcon.innerHTML = MOON_PATH;
+      themeToggle.setAttribute('aria-label','cambiar a modo oscuro');
+      themeToggle.setAttribute('aria-pressed','true');
+    } else {
+      root.removeAttribute('data-theme');
+      themeIcon.innerHTML = SUN_PATH;
+      themeToggle.setAttribute('aria-label','cambiar a modo claro');
+      themeToggle.setAttribute('aria-pressed','false');
+    }
+  }
+
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('aluk-raw-theme'); } catch(e){}
+  applyTheme(savedTheme === 'light' ? 'light' : 'dark');
+
+  themeToggle.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try { localStorage.setItem('aluk-raw-theme', next); } catch(e){}
+  });
+
+  /* ---------- header al hacer scroll ---------- */
+  var header = document.getElementById('site-header');
+  function onScroll(){
+    header.classList.toggle('is-scrolled', window.scrollY > 10);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+
+  /* ---------- menu movil ---------- */
+  var menuToggle = document.getElementById('menu-toggle');
+  var mainNav = document.getElementById('main-nav');
+  function closeMenu(){
+    mainNav.classList.remove('is-open');
+    menuToggle.classList.remove('is-active');
+    menuToggle.setAttribute('aria-expanded','false');
+    menuToggle.setAttribute('aria-label','abrir menu');
+  }
+  function openMenu(){
+    mainNav.classList.add('is-open');
+    menuToggle.classList.add('is-active');
+    menuToggle.setAttribute('aria-expanded','true');
+    menuToggle.setAttribute('aria-label','cerrar menu');
+  }
+  menuToggle.addEventListener('click', function(){
+    mainNav.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+  mainNav.querySelectorAll('.nav-link').forEach(function(link){
+    link.addEventListener('click', closeMenu);
+  });
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeMenu();
+  });
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 860) closeMenu();
+  });
+
+  /* ---------- resaltar enlace activo segun seccion visible ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+  var sections = navLinks.map(function(link){
+    return document.querySelector(link.getAttribute('href'));
+  }).filter(Boolean);
+
+  if('IntersectionObserver' in window){
+    var navObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var id = '#' + entry.target.id;
+          navLinks.forEach(function(link){
+            link.classList.toggle('active-link', link.getAttribute('href') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function(s){ navObserver.observe(s); });
+  }
+
+  /* ---------- animacion al aparecer en scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal, [data-reveal="focus"]');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var revealObserver = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
+    revealEls.forEach(function(el){ revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  /* ---------- filtros de galeria ---------- */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var galleryItems = document.querySelectorAll('.gallery-item');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      var filter = btn.getAttribute('data-filter');
+      galleryItems.forEach(function(item){
+        var match = filter === 'todas' || item.getAttribute('data-category') === filter;
+        item.classList.toggle('is-hidden', !match);
+        if(match){
+          item.classList.remove('fade-in');
+          void item.offsetWidth;
+          item.classList.add('fade-in');
+        }
+      });
+    });
+  });
+
+  /* ---------- lightbox de fotografia ---------- */
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImage = document.getElementById('lightbox-image');
+  var lightboxCaption = document.getElementById('lightbox-caption');
+  var lightboxClose = document.getElementById('lightbox-close');
+  var lightboxPrev = document.getElementById('lightbox-prev');
+  var lightboxNext = document.getElementById('lightbox-next');
+  var triggers = Array.prototype.slice.call(document.querySelectorAll('.gallery-trigger'));
+  var currentIndex = -1;
+  var lastFocusedEl = null;
+
+  function openLightbox(index){
+    currentIndex = index;
+    var trigger = triggers[index];
+    lightboxImage.src = trigger.getAttribute('data-full');
+    lightboxImage.alt = trigger.getAttribute('data-caption') || '';
+    lightboxCaption.textContent = trigger.getAttribute('data-caption') || '';
+    lastFocusedEl = document.activeElement;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
+  }
+  function closeLightbox(){
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+    if(lastFocusedEl) lastFocusedEl.focus();
+  }
+  function showRelative(step){
+    var visible = triggers.filter(function(t){ return !t.closest('.gallery-item').classList.contains('is-hidden'); });
+    var pos = visible.indexOf(triggers[currentIndex]);
+    var nextPos = (pos + step + visible.length) % visible.length;
+    var nextTrigger = visible[nextPos];
+    currentIndex = triggers.indexOf(nextTrigger);
+    lightboxImage.src = nextTrigger.getAttribute('data-full');
+    lightboxImage.alt = nextTrigger.getAttribute('data-caption') || '';
+    lightboxCaption.textContent = nextTrigger.getAttribute('data-caption') || '';
+  }
+
+  triggers.forEach(function(trigger, i){
+    trigger.addEventListener('click', function(){ openLightbox(i); });
+  });
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', function(){ showRelative(-1); });
+  lightboxNext.addEventListener('click', function(){ showRelative(1); });
+  lightbox.addEventListener('click', function(e){
+    if(e.target === lightbox) closeLightbox();
+  });
+  window.addEventListener('keydown', function(e){
+    if(lightbox.hidden) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') showRelative(-1);
+    if(e.key === 'ArrowRight') showRelative(1);
+  });
+
+  /* swipe tactil en el lightbox */
+  var touchStartX = 0;
+  lightbox.addEventListener('touchstart', function(e){
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive:true });
+  lightbox.addEventListener('touchend', function(e){
+    var delta = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(delta) > 50) showRelative(delta > 0 ? -1 : 1);
+  }, { passive:true });
+
+  /* ---------- modal de video ---------- */
+  var videoModal = document.getElementById('video-modal');
+  var videoFrame = document.getElementById('video-modal-frame');
+  var videoClose = document.getElementById('video-modal-close');
+  var videoTriggers = document.querySelectorAll('.video-trigger');
+  var lastVideoFocusedEl = null;
+
+  function openVideoModal(embedUrl){
+    lastVideoFocusedEl = document.activeElement;
+    var iframe = document.createElement('iframe');
+    iframe.src = embedUrl + (embedUrl.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1&rel=0';
+    iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+    iframe.setAttribute('allowfullscreen','');
+    iframe.title = 'reproductor de video';
+    videoFrame.innerHTML = '';
+    videoFrame.appendChild(iframe);
+    videoModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    videoClose.focus();
+  }
+  function closeVideoModal(){
+    videoModal.hidden = true;
+    videoFrame.innerHTML = '';
+    document.body.style.overflow = '';
+    if(lastVideoFocusedEl) lastVideoFocusedEl.focus();
+  }
+  videoTriggers.forEach(function(trigger){
+    trigger.addEventListener('click', function(){
+      openVideoModal(trigger.getAttribute('data-embed'));
+    });
+  });
+  videoClose.addEventListener('click', closeVideoModal);
+  videoModal.addEventListener('click', function(e){
+    if(e.target === videoModal) closeVideoModal();
+  });
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !videoModal.hidden) closeVideoModal();
+  });
+
+  /* ---------- contador de estadisticas ---------- */
+  var statNumbers = document.querySelectorAll('.stat-number');
+  function animateCount(el){
+    var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+    if(reduceMotion){ el.textContent = target; return; }
+    var start = 0;
+    var duration = 1400;
+    var startTime = null;
+    function step(timestamp){
+      if(!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(start + (target - start) * eased);
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    var statsObserver = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          animateCount(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.5 });
+    statNumbers.forEach(function(el){ statsObserver.observe(el); });
+  } else {
+    statNumbers.forEach(function(el){ el.textContent = el.getAttribute('data-target'); });
+  }
+
+  /* ---------- formulario de contacto ----------
+     No hay backend conectado todavia. Este bloque valida
+     el formulario y muestra un mensaje de confirmacion local.
+     Para produccion, conecta "action"/fetch a tu servicio
+     de envio (Formspree, EmailJS, tu propio endpoint, etc). */
+  var contactForm = document.getElementById('contact-form');
+  var formStatus = document.getElementById('form-status');
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!contactForm.checkValidity()){
+      contactForm.reportValidity();
+      return;
+    }
+    formStatus.textContent = 'Mensaje enviado. Te responderé muy pronto, ¡gracias por escribir!';
+    contactForm.reset();
+  });
+
+  /* ---------- cursor personalizado (solo escritorio) ---------- */
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if(canHover && !reduceMotion){
+    var cursor = document.getElementById('cursor-glow');
+    var cx = 0, cy = 0, tx = 0, ty = 0;
+    document.addEventListener('mousemove', function(e){
+      tx = e.clientX; ty = e.clientY;
+      cursor.classList.add('is-active');
+    });
+    document.addEventListener('mouseleave', function(){ cursor.classList.remove('is-active'); });
+    function loop(){
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
+      cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop);
+    }
+    loop();
+    document.querySelectorAll('a, button, .gallery-trigger, .video-trigger').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cursor.classList.add('is-hovering'); });
+      el.addEventListener('mouseleave', function(){ cursor.classList.remove('is-hovering'); });
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
