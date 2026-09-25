@@ -361,14 +361,26 @@ p{ margin:0; }
 }
 .hamburger:hover{ background:var(--bg-elevated-2); }
 .hamburger span{
-  width:1.35rem; height:2px;
+  width:1.4rem; height:3px;
   background:var(--text);
   border-radius:var(--radius-pill);
   transition:transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease);
 }
-.hamburger.is-active span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.hamburger.is-active span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
 .hamburger.is-active span:nth-child(2){ opacity:0; }
-.hamburger.is-active span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+.hamburger.is-active span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
+
+/* tema claro: mientras el header es transparente esta sobre la foto oscura del hero,
+   asi que logo, icono de tema y barras van en claro hasta que se hace scroll */
+:root[data-theme="light"] .site-header:not(.is-scrolled) .logo-aluk,
+:root[data-theme="light"] .site-header:not(.is-scrolled) .icon-btn{ color:var(--blanco-calido); }
+:root[data-theme="light"] .site-header:not(.is-scrolled) .logo-raw{ color:var(--verde-hoja); }
+:root[data-theme="light"] .site-header:not(.is-scrolled) .hamburger span{ background:var(--blanco-calido); }
+@media (min-width:861px){
+  :root[data-theme="light"] .site-header:not(.is-scrolled) .nav-link{ color:rgba(246,241,228,.78); }
+  :root[data-theme="light"] .site-header:not(.is-scrolled) .nav-link:hover,
+  :root[data-theme="light"] .site-header:not(.is-scrolled) .nav-link.active-link{ color:var(--blanco-calido); }
+}
 
 @media (max-width:860px){
   .hamburger{ display:flex; }
@@ -910,9 +922,9 @@ p{ margin:0; }
     <div class="masonry" id="gallery">
 
       <figure class="gallery-item reveal" data-category="naturaleza">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80" data-caption="Bosque en calma">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=700&q=75" alt="Bosque en calma, luz filtrada entre los arboles" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">bosque en calma</span></span>
+        <button class="gallery-trigger" data-full="https://media.alukraw.com/P1126408.webp" data-caption="Torii al anochecer">
+          <img src="https://media.alukraw.com/P1126408.webp" alt="Torii rojo sobre el agua al anochecer, con montanas al fondo" loading="lazy">
+          <span class="gallery-overlay"><span class="gallery-overlay-title">torii al anochecer</span></span>
         </button>
       </figure>
 
