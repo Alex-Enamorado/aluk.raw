@@ -4,19 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>aluk.raw — Fotografía y Videografía</title>
-<meta name="description" content="aluk.raw — Fotografía y videografía con mirada natural y cinematográfica. Portafolio de retrato, eventos, naturaleza, producto y piezas audiovisuales.">
+<meta name="description" content="aluk.raw — Fotografía y videografía con mirada natural y cinematográfica. Portafolio de calles, templos, naturaleza, retratos y piezas audiovisuales.">
 <meta name="theme-color" content="#1a1d14">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="aluk.raw">
 <meta property="og:title" content="aluk.raw — Fotografía y Videografía">
-<meta property="og:description" content="Portafolio de fotografía y videografía con mirada natural y cinematográfica.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:description" content="Fotografía y videografía con mirada natural y cinematográfica.">
+<meta property="og:image" content="https://alukraw.com/fotos/P1126408-full.webp">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="aluk.raw — Fotografía y Videografía">
-<meta name="twitter:description" content="Portafolio de fotografía y videografía con mirada natural y cinematográfica.">
+<meta name="twitter:description" content="Fotografía y videografía con mirada natural y cinematográfica.">
+<meta name="twitter:image" content="https://alukraw.com/fotos/P1126408-full.webp">
 
 <!-- Favicon simple (circulo verde) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%237cb350'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23f6f1e4'/%3E%3C/svg%3E">
@@ -97,12 +98,12 @@
   --font-display:'DeFonte reduced','Plus Jakarta Sans','Inter','Helvetica Neue',Arial,sans-serif;
   --font-body:'Inter','Helvetica Neue',Arial,sans-serif;
 
-  /* radios y espaciados */
-  --radius-lg:20px;
-  --radius-md:14px;
-  --radius-sm:10px;
-  --radius-btn:6px;
-  --radius-pill:999px;
+  /* radios y espaciados: bordes casi rectos, como un paspartu de galeria */
+  --radius-lg:3px;
+  --radius-md:2px;
+  --radius-sm:2px;
+  --radius-btn:2px;
+  --radius-pill:2px;
   --container:1200px;
   --header-h:4.75rem;
 
@@ -121,8 +122,7 @@
   --accent:var(--verde-hoja);
   --accent-strong:var(--verde-bosque);
   --border:rgba(147,161,124,.28);
-  --header-bg:rgba(26,29,20,.72);
-  --glow-color:124,179,80;
+  --header-bg:rgba(26,29,20,.92);
 }
 
 :root[data-theme="light"]{
@@ -135,8 +135,7 @@
   --accent:var(--verde-bosque);
   --accent-strong:var(--verde-profundo);
   --border:rgba(63,92,46,.18);
-  --header-bg:rgba(246,241,228,.75);
-  --glow-color:63,92,46;
+  --header-bg:rgba(246,241,228,.95);
 }
 
 /* =========================================================
@@ -200,7 +199,9 @@ p{ margin:0; }
   text-transform:lowercase;
   font-size:.8rem;
   color:var(--accent);
-  text-shadow:0 0 12px rgba(var(--glow-color),.25);
+  padding-bottom:.5rem;
+  border-bottom:1px solid var(--border);
+  display:inline-block;
 }
 .section-title{
   font-family:var(--font-display);
@@ -210,21 +211,12 @@ p{ margin:0; }
   line-height:1.08;
   margin-top:.5rem;
   letter-spacing:-.02em;
-  text-shadow:
-    0 0 10px rgba(var(--glow-color),.3),
-    0 0 26px rgba(var(--glow-color),.15);
 }
 .section-lead{
   max-width:42rem;
   margin-top:1rem;
   color:var(--text-muted);
   font-size:1.05rem;
-}
-.glow{
-  text-shadow:
-    0 0 12px rgba(var(--glow-color),.4),
-    0 0 30px rgba(var(--glow-color),.22),
-    0 0 64px rgba(var(--glow-color),.12);
 }
 
 /* aparicion suave al hacer scroll: solo un fundido y una leve subida */
@@ -251,13 +243,12 @@ p{ margin:0; }
   font-size:.92rem;
   padding:.8rem 1.6rem;
   border-radius:var(--radius-btn);
-  transition:box-shadow var(--t-fast) var(--ease), background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  transition:background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
   white-space:nowrap;
 }
 .btn-primary{
   background:var(--accent-strong);
   color:var(--blanco-calido);
-  box-shadow:0 6px 16px -10px rgba(var(--glow-color),.35);
 }
 .btn-primary:hover{ background:var(--accent); }
 .btn-outline{
@@ -303,8 +294,6 @@ p{ margin:0; }
   height:var(--header-h);
   z-index:200;
   background:transparent;
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
   border-bottom:1px solid transparent;
   transition:border-color var(--t-fast) var(--ease), background var(--t-slow) var(--ease);
 }
@@ -324,7 +313,7 @@ p{ margin:0; }
   gap:.05em;
 }
 .logo-aluk{ font-weight:300; color:var(--text); }
-.logo-raw{ font-weight:700; color:var(--accent); text-shadow:0 0 10px rgba(var(--glow-color),.3); }
+.logo-raw{ font-weight:700; color:var(--accent); }
 .logo.small{ font-size:1.15rem; }
 
 .main-nav ul{ display:flex; gap:2rem; }
@@ -415,51 +404,20 @@ p{ margin:0; }
 .hero-media{ position:absolute; inset:0; z-index:0; }
 .hero-image{
   width:100%; height:100%; object-fit:cover;
-  filter:sepia(.16) saturate(.85) contrast(1.06) brightness(.8);
+  filter:saturate(.92) contrast(1.04) brightness(.82);
 }
 .hero-gradient{
   position:absolute; inset:0;
   background:
-    radial-gradient(120% 90% at 50% 45%, transparent 45%, rgba(26,29,20,.55) 100%),
-    linear-gradient(180deg, rgba(26,29,20,.55) 0%, rgba(26,29,20,.35) 35%, rgba(26,29,20,.92) 100%),
-    linear-gradient(0deg, var(--negro-verdoso) 0%, transparent 30%);
+    linear-gradient(180deg, rgba(26,29,20,.35) 0%, rgba(26,29,20,.2) 40%, rgba(26,29,20,.94) 100%);
 }
 .hero-grain{
   position:absolute; inset:0;
-  opacity:.06;
+  opacity:.05;
   mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events:none;
 }
-.hero-bloom{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(90px);
-  pointer-events:none;
-  mix-blend-mode:screen;
-  opacity:.55;
-}
-.bloom-1{ width:26rem; height:26rem; top:-6rem; right:-6rem; background:radial-gradient(circle, var(--verde-hoja), transparent 70%); }
-.bloom-2{ width:20rem; height:20rem; bottom:8%; left:-4rem; background:radial-gradient(circle, var(--verde-salvia), transparent 70%); }
-
-.hero-watermark{
-  position:absolute;
-  z-index:0;
-  top:-4vw; right:-3vw;
-  margin:0;
-  font-family:var(--font-display);
-  font-weight:300;
-  text-transform:lowercase;
-  font-size:40vw;
-  line-height:1;
-  color:var(--blanco-calido);
-  opacity:.05;
-  mix-blend-mode:overlay;
-  pointer-events:none;
-  user-select:none;
-  white-space:nowrap;
-}
-@media (max-width:700px){ .hero-watermark{ display:none; } }
 
 .hero-content{ position:relative; z-index:1; padding-block:4rem 5rem; }
 .hero-title{
@@ -499,79 +457,81 @@ p{ margin:0; }
    ========================================================= */
 .section{ position:relative; padding-block:6rem; }
 .section-alt{ background:var(--bg-elevated); }
-.section::before{
-  content:'';
-  position:absolute; inset:0;
-  background:
-    radial-gradient(38rem 26rem at 88% 0%, rgba(var(--glow-color),.10), transparent 60%),
-    radial-gradient(30rem 22rem at 4% 100%, rgba(147,161,124,.10), transparent 60%);
-  pointer-events:none;
-}
 .section > .container{ position:relative; z-index:1; }
 
 /* =========================================================
-   FILTROS + GALERIA (masonry)
+   FILTROS + GALERIA (grid uniforme, como un contact sheet)
    ========================================================= */
 .filters{
-  display:flex; flex-wrap:wrap; gap:.75rem;
+  display:flex; flex-wrap:wrap;
+  gap:0 1.75rem;
   margin-top:2.25rem;
+  border-bottom:1px solid var(--border);
 }
 .filter-btn{
   font-family:var(--font-display);
   font-weight:400;
   text-transform:lowercase;
   font-size:.9rem;
-  padding:.6rem 1.25rem;
-  border-radius:var(--radius-btn);
-  border:1.5px solid var(--border);
+  padding:0 0 .9rem;
   color:var(--text-muted);
-  transition:all var(--t-fast) var(--ease);
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
 }
-.filter-btn:hover{ color:var(--text); border-color:var(--accent); }
-.filter-btn.is-active{ background:var(--accent-strong); border-color:var(--accent-strong); color:var(--blanco-calido); box-shadow:0 0 14px -2px rgba(var(--glow-color),.5); }
+.filter-btn:hover{ color:var(--text); }
+.filter-btn.is-active{ color:var(--text); border-color:var(--accent); }
 
-.masonry{
-  column-count:1;
-  column-gap:1.1rem;
+.galeria{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:1px;
   margin-top:2.5rem;
+  background:var(--border);
+  border:1px solid var(--border);
 }
-@media (min-width:640px){ .masonry{ column-count:2; } }
-@media (min-width:1024px){ .masonry{ column-count:3; } }
+@media (min-width:640px){ .galeria{ grid-template-columns:repeat(3, 1fr); } }
+@media (min-width:1024px){ .galeria{ grid-template-columns:repeat(4, 1fr); } }
 
-.gallery-item{
-  break-inside:avoid;
-  margin:0 0 1.1rem;
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-}
+.gallery-item{ background:var(--bg); }
 .gallery-item.is-hidden{ display:none; }
 .gallery-item.fade-in{ animation:fadeInUp .45s var(--ease) both; }
-@keyframes fadeInUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp{ from{ opacity:0; } to{ opacity:1; } }
 
-.gallery-trigger{ position:relative; display:block; width:100%; border-radius:var(--radius-lg); overflow:hidden; }
+.gallery-trigger{ position:relative; display:block; width:100%; }
+.gallery-trigger .frame{ display:block; aspect-ratio:3/4; overflow:hidden; background:var(--bg-elevated-2); }
 .gallery-trigger img{
-  width:100%; height:auto;
-  filter:blur(1.5px) sepia(.15) saturate(.82) contrast(1.05) brightness(.9);
-  transition:filter var(--t-slow) var(--ease);
+  width:100%; height:100%; object-fit:cover;
+  transition:transform var(--t-slow) var(--ease);
 }
-.gallery-trigger:hover img, .gallery-trigger:focus-visible img{
-  filter:blur(0) sepia(.15) saturate(.82) contrast(1.05) brightness(1);
+.gallery-trigger:hover img, .gallery-trigger:focus-visible img{ transform:scale(1.035); }
+.gallery-caption{
+  display:flex; align-items:baseline; gap:.5rem;
+  padding:.8rem 1rem;
+  border-top:1px solid var(--border);
 }
-.gallery-overlay{
-  position:absolute; inset:0;
-  display:flex; align-items:flex-end;
-  padding:1.1rem;
-  background:linear-gradient(180deg, transparent 45%, rgba(2,26,19,.85) 100%);
-  opacity:0;
-  transition:opacity var(--t-fast) var(--ease);
-}
-.gallery-trigger:hover .gallery-overlay, .gallery-trigger:focus-visible .gallery-overlay{ opacity:1; }
-.gallery-overlay-title{
+.gallery-caption-title{
+  flex:1; min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
   font-family:var(--font-display);
-  font-weight:600;
+  font-weight:400;
   text-transform:lowercase;
-  color:var(--blanco-calido);
-  font-size:1.05rem;
+  color:var(--text);
+  font-size:.92rem;
+}
+.gallery-caption-tag{
+  flex-shrink:0;
+  font-family:var(--font-body);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--text-muted);
+  font-size:.68rem;
+  white-space:nowrap;
+}
+@media (max-width:480px){
+  .galeria{ grid-template-columns:1fr; }
 }
 
 /* =========================================================
@@ -579,8 +539,7 @@ p{ margin:0; }
    ========================================================= */
 .lightbox{
   position:fixed; inset:0; z-index:500;
-  background:rgba(6,15,12,.92);
-  backdrop-filter:blur(6px);
+  background:rgba(6,15,12,.95);
   display:flex; align-items:center; justify-content:center;
   padding:1.5rem;
 }
@@ -588,8 +547,6 @@ p{ margin:0; }
 .lightbox-image{
   max-width:min(92vw, 68rem);
   max-height:78vh;
-  border-radius:var(--radius-md);
-  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
 }
 .lightbox-caption{
   position:absolute; bottom:2.5rem; left:0; right:0;
@@ -628,27 +585,26 @@ p{ margin:0; }
 @media (min-width:640px){ .video-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (min-width:1024px){ .video-grid{ grid-template-columns:repeat(3,1fr); } }
 
-.video-trigger{ position:relative; display:block; width:100%; aspect-ratio:16/10; border-radius:var(--radius-lg); overflow:hidden; }
+.video-trigger{ position:relative; display:block; width:100%; aspect-ratio:16/10; overflow:hidden; border:1px solid var(--border); }
 .video-preview{
   width:100%; height:100%; object-fit:cover;
   background:var(--bg-elevated-2);
-  filter:sepia(.15) saturate(.85) contrast(1.05) brightness(.84);
-  transition:filter var(--t-slow) var(--ease);
+  filter:saturate(.9) brightness(.86);
+  transition:filter var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
 }
-.video-trigger:hover .video-preview, .video-trigger:focus-visible .video-preview{ filter:sepia(.15) saturate(.85) contrast(1.05) brightness(1); }
+.video-trigger:hover .video-preview, .video-trigger:focus-visible .video-preview{ filter:saturate(.9) brightness(1); transform:scale(1.02); }
 .play-icon{
   position:absolute; inset:0;
   display:flex; align-items:center; justify-content:center;
 }
 .play-icon span{
-  width:4rem; height:4rem;
+  width:3.6rem; height:3.6rem;
   border-radius:50%;
-  background:rgba(246,241,228,.14);
-  backdrop-filter:blur(6px);
+  border:1.5px solid rgba(246,241,228,.5);
   display:flex; align-items:center; justify-content:center;
-  transition:background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+  transition:background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
 }
-.video-trigger:hover .play-icon span{ background:var(--accent-strong); transform:scale(1.08); }
+.video-trigger:hover .play-icon span{ background:var(--accent-strong); border-color:var(--accent-strong); transform:scale(1.08); }
 .play-icon svg{ width:1.6rem; height:1.6rem; color:var(--blanco-calido); margin-left:3px; }
 .video-info{ padding:1.1rem 0 0; }
 .video-info h3{
@@ -662,14 +618,13 @@ p{ margin:0; }
 /* modal de video */
 .video-modal{
   position:fixed; inset:0; z-index:500;
-  background:rgba(6,15,12,.92);
-  backdrop-filter:blur(6px);
+  background:rgba(6,15,12,.95);
   display:flex; align-items:center; justify-content:center;
   padding:1.25rem;
 }
 .video-modal[hidden]{ display:none; }
 .video-modal-inner{ position:relative; width:min(92vw,64rem); }
-.video-modal-frame{ position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius-md); overflow:hidden; background:#000; }
+.video-modal-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; }
 .video-modal-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 .video-modal-close{
   position:absolute; top:-3.25rem; right:0;
@@ -691,9 +646,8 @@ p{ margin:0; }
 }
 @media (min-width:900px){ .about-grid{ grid-template-columns:.85fr 1fr; } }
 .about-media img{
-  border-radius:var(--radius-lg);
-  filter:sepia(.12) saturate(.92) contrast(1.04);
-  box-shadow:0 30px 60px -30px rgba(0,0,0,.5);
+  border:1px solid var(--border);
+  filter:saturate(.95) contrast(1.02);
 }
 .about-content p{ margin-top:1.1rem; color:var(--text-muted); max-width:34rem; }
 .stats{ display:flex; flex-wrap:wrap; gap:2.5rem; margin-top:2.5rem; }
@@ -703,7 +657,6 @@ p{ margin:0; }
   font-weight:600;
   font-size:2.3rem;
   color:var(--accent);
-  text-shadow:0 0 16px rgba(var(--glow-color),.2);
 }
 .stat-label{
   font-family:var(--font-body);
@@ -798,7 +751,6 @@ p{ margin:0; }
 .form-row input:focus, .form-row select:focus, .form-row textarea:focus{
   outline:none;
   border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(var(--glow-color),.18);
 }
 .contact-form .btn{ align-self:flex-start; margin-top:.25rem; }
 
@@ -872,22 +824,16 @@ p{ margin:0; }
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="inicio">
   <div class="hero-media" aria-hidden="true">
-    <!-- TODO: reemplaza esta imagen por tu propio video o foto de fondo.
+    <!-- TODO: si quieres cambiar la foto de portada, reemplaza esta imagen.
          Para usar video: <video class="hero-image" autoplay muted loop playsinline poster="..."><source src="videos/hero.mp4" type="video/mp4"></video> -->
-    <img class="hero-image" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&q=80" alt="" loading="eager">
+    <img class="hero-image" src="fotos/P1126408-full.webp" alt="" loading="eager">
     <div class="hero-grain"></div>
-    <div class="hero-bloom bloom-1"></div>
-    <div class="hero-bloom bloom-2"></div>
     <div class="hero-gradient"></div>
   </div>
 
-  <!-- palabra decorativa gigante en DeFonte Leger: muestra el efecto de halacion
-       de la fuente a gran escala, tal como pide el brief original -->
-  <p class="hero-watermark" aria-hidden="true">raw</p>
-
   <div class="container hero-content">
     <p class="eyebrow reveal">fotografia · video · edicion</p>
-    <h1 class="hero-title" data-reveal="focus">capturando<br><span class="glow">lo real</span></h1>
+    <h1 class="hero-title" data-reveal="focus">capturando<br>lo real</h1>
     <p class="hero-subtitle reveal">Fotografía y video con mirada natural: capturo momentos reales, con luz honesta y una estética cinematográfica.</p>
     <div class="hero-actions reveal">
       <a href="#fotografia" class="btn btn-primary">ver portafolio</a>
@@ -908,129 +854,147 @@ p{ margin:0; }
   <div class="container">
     <p class="eyebrow reveal">01 — portafolio</p>
     <h2 class="section-title" data-reveal="focus">fotografia</h2>
-    <p class="section-lead reveal">Una selección de trabajos recientes en naturaleza, retrato, eventos y producto — luz natural y composición honesta.</p>
+    <p class="section-lead reveal">Una seleccion de trabajos recientes: calles, templos, naturaleza y algo de mecanica — siempre con luz natural y composicion honesta.</p>
 
     <div class="filters reveal" role="group" aria-label="filtrar galeria por categoria">
       <button class="filter-btn is-active" data-filter="todas">todas</button>
+      <button class="filter-btn" data-filter="calles">calles</button>
+      <button class="filter-btn" data-filter="templos">templos</button>
       <button class="filter-btn" data-filter="naturaleza">naturaleza</button>
-      <button class="filter-btn" data-filter="retrato">retrato</button>
-      <button class="filter-btn" data-filter="eventos">eventos</button>
-      <button class="filter-btn" data-filter="producto">producto</button>
+      <button class="filter-btn" data-filter="autos">autos</button>
+      <button class="filter-btn" data-filter="retratos">retratos</button>
     </div>
 
-    <!-- TODO: reemplaza cada imagen por tus propias fotos. Mantén data-category y data-caption -->
-    <div class="masonry" id="gallery">
+    <div class="galeria" id="gallery">
 
-      <figure class="gallery-item reveal" data-category="naturaleza">
-        <button class="gallery-trigger" data-full="https://media.alukraw.com/P1126408.webp" data-caption="Torii al anochecer">
-          <img src="https://media.alukraw.com/P1126408.webp" alt="Torii rojo sobre el agua al anochecer, con montanas al fondo" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">torii al anochecer</span></span>
+      <figure class="gallery-item reveal" data-category="templos">
+        <button class="gallery-trigger" data-full="fotos/P1126408-full.webp" data-caption="torii al anochecer">
+          <span class="frame"><img src="fotos/P1126408-grid.webp" alt="Torii rojo flotando sobre el agua al anochecer, con montañas al fondo" loading="lazy"></span>
         </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">torii al anochecer</span>
+          <span class="gallery-caption-tag">templos</span>
+        </figcaption>
       </figure>
 
-      <figure class="gallery-item reveal" data-category="retrato">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1600&q=80" data-caption="Retrato natural">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=75" alt="Retrato con luz natural" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">retrato natural</span></span>
+      <figure class="gallery-item reveal" data-category="autos">
+        <button class="gallery-trigger" data-full="fotos/P1103197-full.webp" data-caption="huracan nocturno">
+          <span class="frame"><img src="fotos/P1103197-grid.webp" alt="Lamborghini Huracán gris estacionado de noche bajo un paso elevado en Tokio" loading="lazy"></span>
         </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="eventos">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" data-caption="Celebracion al aire libre">
-          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=75" alt="Celebracion al aire libre" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">celebracion al aire libre</span></span>
-        </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="producto">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=1600&q=80" data-caption="Producto minimalista">
-          <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=700&q=75" alt="Composicion de producto minimalista" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">producto minimalista</span></span>
-        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">huracan nocturno</span>
+          <span class="gallery-caption-tag">autos</span>
+        </figcaption>
       </figure>
 
       <figure class="gallery-item reveal" data-category="naturaleza">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1600&q=80" data-caption="Cumbres al amanecer">
-          <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=700&q=75" alt="Cumbres al amanecer" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">cumbres al amanecer</span></span>
+        <button class="gallery-trigger" data-full="fotos/P1103315-full.webp" data-caption="frutos de invierno">
+          <span class="frame"><img src="fotos/P1103315-grid.webp" alt="Rama con frutos rojos de invierno contra un cielo azul intenso" loading="lazy"></span>
         </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">frutos de invierno</span>
+          <span class="gallery-caption-tag">naturaleza</span>
+        </figcaption>
       </figure>
 
-      <figure class="gallery-item reveal" data-category="retrato">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=1600&q=80" data-caption="Mirada al atardecer">
-          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=700&q=75" alt="Retrato al atardecer" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">mirada al atardecer</span></span>
+      <figure class="gallery-item reveal" data-category="calles">
+        <button class="gallery-trigger" data-full="fotos/P1103685-full.webp" data-caption="mascara en la vitrina">
+          <span class="frame"><img src="fotos/P1103685-grid.webp" alt="Máscara tradicional japonesa iluminada sobre fondo negro en un escaparate" loading="lazy"></span>
         </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">mascara en la vitrina</span>
+          <span class="gallery-caption-tag">calles</span>
+        </figcaption>
       </figure>
 
-      <figure class="gallery-item reveal" data-category="eventos">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80" data-caption="Brindis">
-          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=75" alt="Brindis en un evento" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">brindis</span></span>
+      <figure class="gallery-item reveal" data-category="autos">
+        <button class="gallery-trigger" data-full="fotos/P1114259-Enhanced-NR-full.webp" data-caption="elegancia nocturna">
+          <span class="frame"><img src="fotos/P1114259-Enhanced-NR-grid.webp" alt="Aston Martin verde azulado estacionado de noche en una calle de Tokio" loading="lazy"></span>
         </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">elegancia nocturna</span>
+          <span class="gallery-caption-tag">autos</span>
+        </figcaption>
       </figure>
 
-      <figure class="gallery-item reveal" data-category="producto">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=1600&q=80" data-caption="Detalle de textura">
-          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=700&q=75" alt="Detalle de textura de producto" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">detalle de textura</span></span>
+      <figure class="gallery-item reveal" data-category="calles">
+        <button class="gallery-trigger" data-full="fotos/P1114279-full.webp" data-caption="puerta nocturna">
+          <span class="frame"><img src="fotos/P1114279-grid.webp" alt="Entrada iluminada de un barrio chino al anochecer, con carteles de neón" loading="lazy"></span>
         </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">puerta nocturna</span>
+          <span class="gallery-caption-tag">calles</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="calles">
+        <button class="gallery-trigger" data-full="fotos/P1114318-full.webp" data-caption="farolillos rojos">
+          <span class="frame"><img src="fotos/P1114318-grid.webp" alt="Hilera de farolillos rojos colgando sobre una calle comercial nocturna" loading="lazy"></span>
+        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">farolillos rojos</span>
+          <span class="gallery-caption-tag">calles</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="calles">
+        <button class="gallery-trigger" data-full="fotos/P1114453-full.webp" data-caption="luces de neon">
+          <span class="frame"><img src="fotos/P1114453-grid.webp" alt="Fachada de un restaurante japonés cubierta de carteles y luces de neón" loading="lazy"></span>
+        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">luces de neon</span>
+          <span class="gallery-caption-tag">calles</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="templos">
+        <button class="gallery-trigger" data-full="fotos/P1114649-full.webp" data-caption="gatos de la fortuna">
+          <span class="frame"><img src="fotos/P1114649-grid.webp" alt="Decenas de figuras de gatos maneki-neko blancos en un templo" loading="lazy"></span>
+        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">gatos de la fortuna</span>
+          <span class="gallery-caption-tag">templos</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="retratos">
+        <button class="gallery-trigger" data-full="fotos/P1125509-full.webp" data-caption="tarde en familia">
+          <span class="frame"><img src="fotos/P1125509-grid.webp" alt="Familia compartiendo un momento espontáneo en un parque" loading="lazy"></span>
+        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">tarde en familia</span>
+          <span class="gallery-caption-tag">retratos</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="templos">
+        <button class="gallery-trigger" data-full="fotos/P1125838-full.webp" data-caption="pabellon dorado">
+          <span class="frame"><img src="fotos/P1125838-grid.webp" alt="Pabellón dorado reflejado en el agua de un estanque en Kioto" loading="lazy"></span>
+        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">pabellon dorado</span>
+          <span class="gallery-caption-tag">templos</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item reveal" data-category="templos">
+        <button class="gallery-trigger" data-full="fotos/P1126101-full.webp" data-caption="pagoda entre arboles">
+          <span class="frame"><img src="fotos/P1126101-grid.webp" alt="Pagoda de cinco pisos asomando entre árboles" loading="lazy"></span>
+        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">pagoda entre arboles</span>
+          <span class="gallery-caption-tag">templos</span>
+        </figcaption>
       </figure>
 
       <figure class="gallery-item reveal" data-category="naturaleza">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80" data-caption="Sendero entre montanas">
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=75" alt="Sendero entre montanas" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">sendero entre montanas</span></span>
+        <button class="gallery-trigger" data-full="fotos/P1126211-full.webp" data-caption="puente de otono">
+          <span class="frame"><img src="fotos/P1126211-grid.webp" alt="Puente rojo entre árboles con follaje de otoño" loading="lazy"></span>
         </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="retrato">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=80" data-caption="Luz lateral">
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=75" alt="Retrato con luz lateral" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">luz lateral</span></span>
-        </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="eventos">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80" data-caption="Ceremonia">
-          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=700&q=75" alt="Ceremonia" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">ceremonia</span></span>
-        </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="producto">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=1600&q=80" data-caption="Composicion de estudio">
-          <img src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=700&q=75" alt="Composicion de estudio" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">composicion de estudio</span></span>
-        </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="naturaleza">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=1600&q=80" data-caption="Luz entre los arboles">
-          <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=700&q=75" alt="Luz entre los arboles" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">luz entre los arboles</span></span>
-        </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="retrato">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=1600&q=80" data-caption="Retrato urbano">
-          <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=700&q=75" alt="Retrato urbano" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">retrato urbano</span></span>
-        </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="eventos">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=1600&q=80" data-caption="Fiesta nocturna">
-          <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=700&q=75" alt="Fiesta nocturna" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">fiesta nocturna</span></span>
-        </button>
-      </figure>
-
-      <figure class="gallery-item reveal" data-category="producto">
-        <button class="gallery-trigger" data-full="https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?auto=format&fit=crop&w=1600&q=80" data-caption="Luz de producto">
-          <img src="https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?auto=format&fit=crop&w=700&q=75" alt="Iluminacion de producto" loading="lazy">
-          <span class="gallery-overlay"><span class="gallery-overlay-title">luz de producto</span></span>
-        </button>
+        <figcaption class="gallery-caption">
+          <span class="gallery-caption-title">puente de otono</span>
+          <span class="gallery-caption-tag">naturaleza</span>
+        </figcaption>
       </figure>
 
     </div>
@@ -1151,8 +1115,7 @@ p{ margin:0; }
 <section class="section" id="sobre-mi">
   <div class="container about-grid">
     <div class="about-media reveal">
-      <!-- TODO: reemplaza por tu propia foto -->
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Fotografo trabajando con su camara al aire libre" loading="lazy">
+      <img src="fotos/P1126211-full.webp" alt="Puente rojo entre árboles con follaje de otoño en Japón" loading="lazy">
     </div>
     <div class="about-content">
       <p class="eyebrow reveal">03 — quien soy</p>
