@@ -104,7 +104,7 @@
   --radius-sm:2px;
   --radius-btn:2px;
   --radius-pill:2px;
-  --container:1200px;
+  --container:1360px;
   --header-h:4.75rem;
 
   /* transiciones */
@@ -495,6 +495,12 @@ p{ margin:0; }
 @media (min-width:640px){ .galeria{ grid-template-columns:repeat(3, 1fr); } }
 @media (min-width:1024px){ .galeria{ grid-template-columns:repeat(4, 1fr); } }
 
+/* con 13 fotos sobra una en la ultima fila: en vez de dejarla sola
+   pegada a la izquierda, se centra y se agranda como cierre */
+.galeria .gallery-item:last-child{ grid-column:1/-1; max-width:50%; margin-inline:auto; }
+@media (min-width:640px){ .galeria .gallery-item:last-child{ grid-column:2/3; max-width:none; margin-inline:0; } }
+@media (min-width:1024px){ .galeria .gallery-item:last-child{ grid-column:2/4; } }
+
 .gallery-item{ background:var(--bg); }
 .gallery-item.is-hidden{ display:none; }
 .gallery-item.fade-in{ animation:fadeInUp .45s var(--ease) both; }
@@ -542,6 +548,7 @@ p{ margin:0; }
 }
 @media (max-width:480px){
   .galeria{ grid-template-columns:1fr; }
+  .galeria .gallery-item:last-child{ grid-column:auto; max-width:none; margin-inline:0; }
 }
 
 /* =========================================================
