@@ -399,7 +399,7 @@ p{ margin:0; }
   position:relative;
   min-height:100svh;
   display:flex;
-  align-items:flex-end;
+  align-items:center;
   overflow:hidden;
   padding-top:var(--header-h);
 }
@@ -421,7 +421,7 @@ p{ margin:0; }
   pointer-events:none;
 }
 
-.hero-content{ position:relative; z-index:1; padding-block:4rem 5rem; }
+.hero-content{ position:relative; z-index:1; padding-block:4rem 5rem; text-align:center; }
 .hero-title{
   font-family:var(--font-display);
   font-weight:600;
@@ -432,7 +432,13 @@ p{ margin:0; }
   color:var(--blanco-calido);
   margin-top:1rem;
 }
+/* el hero siempre tiene fondo oscuro (la foto), sin importar el tema,
+   asi que el nombre se fuerza a colores claros en vez de heredar --text/--accent */
+.hero-title .logo-aluk, .hero-title .logo-raw{ font-size:inherit; }
+.hero-title .logo-aluk{ color:var(--blanco-calido); }
+.hero-title .logo-raw{ color:var(--verde-hoja); text-shadow:0 0 14px rgba(124,179,80,.4); }
 .hero-subtitle{
+  margin-inline:auto;
   margin-top:1.35rem;
   max-width:32rem;
   font-size:1.05rem;
@@ -440,7 +446,7 @@ p{ margin:0; }
   line-height:1.65;
   color:var(--text-muted);
 }
-.hero-actions{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.25rem; }
+.hero-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:2.25rem; }
 
 .scroll-cue{
   position:absolute; z-index:1; bottom:1.75rem; left:50%; transform:translateX(-50%);
@@ -843,8 +849,8 @@ p{ margin:0; }
 
   <div class="container hero-content">
     <p class="eyebrow reveal">fotografia · video · edicion</p>
-    <h1 class="hero-title" data-reveal="focus">alex enamorado</h1>
-    <p class="hero-subtitle reveal">aluk.raw — portfolio de fotografía y video.</p>
+    <h1 class="hero-title" data-reveal="focus"><span class="logo-aluk">aluk</span><span class="logo-raw">.raw</span></h1>
+    <p class="hero-subtitle reveal">alex enamorado</p>
     <div class="hero-actions reveal">
       <a href="#fotografia" class="btn btn-primary">ver portafolio</a>
       <a href="#contacto" class="btn btn-link">
