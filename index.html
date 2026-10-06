@@ -399,7 +399,7 @@ p{ margin:0; }
   position:relative;
   min-height:100svh;
   display:flex;
-  align-items:center;
+  align-items:flex-end;
   overflow:hidden;
   padding-top:var(--header-h);
 }
@@ -421,7 +421,7 @@ p{ margin:0; }
   pointer-events:none;
 }
 
-.hero-content{ position:relative; z-index:1; padding-block:4rem 5rem; text-align:center; }
+.hero-content{ position:relative; z-index:1; padding-block:4rem 5rem; }
 .hero-title{
   font-family:var(--font-display);
   font-weight:600;
@@ -438,7 +438,6 @@ p{ margin:0; }
 .hero-title .logo-aluk{ color:var(--blanco-calido); }
 .hero-title .logo-raw{ color:var(--verde-hoja); text-shadow:0 0 14px rgba(124,179,80,.4); }
 .hero-subtitle{
-  margin-inline:auto;
   margin-top:1.35rem;
   max-width:32rem;
   font-size:1.05rem;
@@ -446,7 +445,7 @@ p{ margin:0; }
   line-height:1.65;
   color:var(--text-muted);
 }
-.hero-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:2.25rem; }
+.hero-actions{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.25rem; }
 
 .scroll-cue{
   position:absolute; z-index:1; bottom:1.75rem; left:50%; transform:translateX(-50%);
