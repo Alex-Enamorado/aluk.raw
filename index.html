@@ -640,7 +640,7 @@ p{ margin:0; }
 .video-modal[hidden]{ display:none; }
 .video-modal-inner{ position:relative; width:min(92vw,64rem); }
 .video-modal-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; }
-.video-modal-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-modal-frame video{ position:absolute; inset:0; width:100%; height:100%; background:#000; }
 .video-modal-close{
   position:absolute; top:-3.25rem; right:0;
   width:2.75rem; height:2.75rem; border-radius:50%;
@@ -1023,102 +1023,49 @@ p{ margin:0; }
     <h2 class="section-title" data-reveal="focus">videografia</h2>
     <p class="section-lead reveal">Piezas audiovisuales breves, con ritmo natural y una estética cálida, pensadas para contar lo esencial.</p>
 
-    <!-- TODO: cambia data-embed por la URL de embed real (YouTube/Vimeo) de cada video.
-         Cada tarjeta reproduce un clip corto y silencioso en bucle (sin necesidad de
-         clic) apenas entra en pantalla. Coloca esos clips en una carpeta "videos" junto
-         a este archivo, con nombres cortos y livianos (unos segundos, sin audio,
-         idealmente menos de 2-3 MB cada uno): videos/preview-raices.mp4, etc.
-         Mientras no agregues el archivo, el navegador simplemente muestra la miniatura
-         (atributo poster) sin errores. -->
+    <!-- Cada tarjeta muestra un clip corto y silencioso en bucle (videos/web/<nombre>-preview.mp4)
+         y, al hacer clic, abre el video completo (data-video) en el reproductor. -->
     <div class="video-grid" id="video-grid">
 
       <article class="video-card reveal">
-        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: raices">
-          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=900&q=75">
-            <source src="videos/preview-raices.mp4" type="video/mp4">
+        <button class="video-trigger" data-video="videos/web/daydrinking.mp4" data-poster="videos/web/daydrinking-poster.jpg" aria-label="reproducir video: daydrinking">
+          <video class="video-preview" muted loop playsinline preload="none" poster="videos/web/daydrinking-poster.jpg">
+            <source src="videos/web/daydrinking-preview.mp4" type="video/mp4">
           </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
         </button>
         <div class="video-info">
-          <h3>raices</h3>
-          <p>documental · 2024</p>
+          <h3>daydrinking</h3>
         </div>
       </article>
 
       <article class="video-card reveal">
-        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: entre mareas">
-          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=75">
-            <source src="videos/preview-entre-mareas.mp4" type="video/mp4">
+        <button class="video-trigger" data-video="videos/web/demo.mp4" data-poster="videos/web/demo-poster.jpg" aria-label="reproducir video: demo">
+          <video class="video-preview" muted loop playsinline preload="none" poster="videos/web/demo-poster.jpg">
+            <source src="videos/web/demo-preview.mp4" type="video/mp4">
           </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
         </button>
         <div class="video-info">
-          <h3>entre mareas</h3>
-          <p>publicidad · 2023</p>
+          <h3>demo</h3>
         </div>
       </article>
 
       <article class="video-card reveal">
-        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: vuelo bajo">
-          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=900&q=75">
-            <source src="videos/preview-vuelo-bajo.mp4" type="video/mp4">
+        <button class="video-trigger" data-video="videos/web/japan.mp4" data-poster="videos/web/japan-poster.jpg" aria-label="reproducir video: japan">
+          <video class="video-preview" muted loop playsinline preload="none" poster="videos/web/japan-poster.jpg">
+            <source src="videos/web/japan-preview.mp4" type="video/mp4">
           </video>
           <span class="play-icon"><span>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
           </span></span>
         </button>
         <div class="video-info">
-          <h3>vuelo bajo</h3>
-          <p>drone · 2024</p>
-        </div>
-      </article>
-
-      <article class="video-card reveal">
-        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: camino verde">
-          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=900&q=75">
-            <source src="videos/preview-camino-verde.mp4" type="video/mp4">
-          </video>
-          <span class="play-icon"><span>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-          </span></span>
-        </button>
-        <div class="video-info">
-          <h3>camino verde</h3>
-          <p>musical · 2022</p>
-        </div>
-      </article>
-
-      <article class="video-card reveal">
-        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: retratos de oficio">
-          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=75">
-            <source src="videos/preview-retratos-de-oficio.mp4" type="video/mp4">
-          </video>
-          <span class="play-icon"><span>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-          </span></span>
-        </button>
-        <div class="video-info">
-          <h3>retratos de oficio</h3>
-          <p>documental · 2023</p>
-        </div>
-      </article>
-
-      <article class="video-card reveal">
-        <button class="video-trigger" data-embed="https://www.youtube.com/embed/TU_ID_DE_VIDEO" aria-label="reproducir video: horizonte">
-          <video class="video-preview" muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=900&q=75">
-            <source src="videos/preview-horizonte.mp4" type="video/mp4">
-          </video>
-          <span class="play-icon"><span>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-          </span></span>
-        </button>
-        <div class="video-info">
-          <h3>horizonte</h3>
-          <p>publicidad · 2025</p>
+          <h3>japan</h3>
         </div>
       </article>
 
@@ -1549,15 +1496,17 @@ p{ margin:0; }
   var lastVideoFocusedEl = null;
   var activePreview = null;
 
-  function openVideoModal(embedUrl){
+  function openVideoModal(src, poster){
     lastVideoFocusedEl = document.activeElement;
-    var iframe = document.createElement('iframe');
-    iframe.src = embedUrl + (embedUrl.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1&rel=0';
-    iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
-    iframe.setAttribute('allowfullscreen','');
-    iframe.title = 'reproductor de video';
+    var player = document.createElement('video');
+    player.src = src;
+    if(poster) player.poster = poster;
+    player.controls = true;
+    player.autoplay = true;
+    player.playsInline = true;
+    player.preload = 'metadata';
     videoFrame.innerHTML = '';
-    videoFrame.appendChild(iframe);
+    videoFrame.appendChild(player);
     videoModal.hidden = false;
     document.body.style.overflow = 'hidden';
     videoClose.focus();
@@ -1573,7 +1522,7 @@ p{ margin:0; }
     trigger.addEventListener('click', function(){
       activePreview = trigger.querySelector('.video-preview');
       if(activePreview) activePreview.pause();
-      openVideoModal(trigger.getAttribute('data-embed'));
+      openVideoModal(trigger.getAttribute('data-video'), trigger.getAttribute('data-poster'));
     });
   });
   videoClose.addEventListener('click', closeVideoModal);
