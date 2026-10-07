@@ -549,10 +549,40 @@ p{ margin:0; }
   font-size:.68rem;
   white-space:nowrap;
 }
+/* indicacion de "esto es un carrusel": linea corta con flecha animada,
+   solo visible en telefono, justo antes del carrusel. */
+.carousel-hint{
+  display:none;
+  align-items:center;
+  gap:.4rem;
+  margin-top:1.25rem;
+  font-family:var(--font-display);
+  font-weight:400;
+  text-transform:lowercase;
+  letter-spacing:.03em;
+  font-size:.82rem;
+  color:var(--text-muted);
+}
+.carousel-hint svg{
+  width:1rem; height:1rem;
+  animation:hint-nudge 1.8s var(--ease) infinite;
+}
+@keyframes hint-nudge{
+  0%,100%{ transform:translateX(0); opacity:.6; }
+  50%{ transform:translateX(5px); opacity:1; }
+}
+@media (max-width:639px){
+  .carousel-hint{ display:flex; }
+}
+@media (prefers-reduced-motion: reduce){
+  .carousel-hint svg{ animation:none; }
+}
+
 /* en telefono: en vez de una columna larga para bajar, carrusel horizontal
-   con scroll-snap (cada foto ocupa ~82% del ancho, con un pedazo de la
-   siguiente asomando para indicar que se puede deslizar). Mismo marco,
-   mismo caption, solo cambia la disposicion. */
+   con scroll-snap. Padding lateral + item al 100% de ese espacio = cada
+   foto queda centrada, con un pedazo de la anterior y la siguiente
+   asomando a los lados. Mismo marco, mismo caption, solo cambia la
+   disposicion. */
 @media (max-width:639px){
   .galeria{
     display:flex;
@@ -562,11 +592,12 @@ p{ margin:0; }
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
+    padding-inline:8%;
   }
   .galeria::-webkit-scrollbar{ display:none; }
   .gallery-item{
-    flex:0 0 82%;
-    scroll-snap-align:start;
+    flex:0 0 100%;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
   }
 }
@@ -633,11 +664,12 @@ p{ margin:0; }
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
+    padding-inline:8%;
   }
   .video-grid::-webkit-scrollbar{ display:none; }
   .video-card{
-    flex:0 0 82%;
-    scroll-snap-align:start;
+    flex:0 0 100%;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
   }
 }
@@ -922,6 +954,11 @@ p{ margin:0; }
       <button class="filter-btn" data-filter="retratos">retratos</button>
     </div>
 
+    <p class="carousel-hint">
+      deslizá para ver más
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </p>
+
     <div class="galeria" id="gallery">
 
       <figure class="gallery-item reveal" data-category="templos">
@@ -1064,6 +1101,11 @@ p{ margin:0; }
     <p class="eyebrow reveal">02 — reel</p>
     <h2 class="section-title" data-reveal="focus">videografia</h2>
     <p class="section-lead reveal">Piezas audiovisuales breves, con ritmo natural y una estética cálida, pensadas para contar lo esencial.</p>
+
+    <p class="carousel-hint">
+      deslizá para ver más
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </p>
 
     <!-- Cada tarjeta muestra un clip corto y silencioso en bucle (videos/web/<nombre>-preview.mp4)
          y, al hacer clic, abre el video completo (data-video) en el reproductor. -->
