@@ -844,6 +844,15 @@ p{ margin:0; }
   border-color:var(--accent);
 }
 .contact-form .btn{ align-self:flex-start; margin-top:.25rem; }
+.form-status{
+  padding:2rem 1.5rem;
+  border:1.5px solid var(--accent);
+  border-radius:.75rem;
+  color:var(--accent);
+  align-self:start;
+}
+.form-status[hidden]{ display:none; }
+.form-status p{ margin-bottom:1rem; }
 
 /* =========================================================
    FOOTER
@@ -1313,6 +1322,7 @@ p{ margin:0; }
       <input type="hidden" name="_subject" value="Nuevo mensaje desde aluk.raw">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://alukraw.com/?enviado=1#contacto">
       <div class="form-row">
         <label for="name">nombre</label>
         <input type="text" id="name" name="name" autocomplete="name" required>
@@ -1338,6 +1348,11 @@ p{ margin:0; }
       </div>
       <button type="submit" class="btn btn-primary">enviar mensaje</button>
     </form>
+
+    <div class="form-status" id="form-status" role="status" aria-live="polite" hidden>
+      <p>mensaje enviado, gracias. te respondo pronto.</p>
+      <button type="button" class="btn btn-link" id="form-again">enviar otro mensaje</button>
+    </div>
   </div>
 </section>
 
@@ -1666,6 +1681,18 @@ p{ margin:0; }
   contactForm.addEventListener('submit', function(){
     contactSubmitBtn.disabled = true;
   });
+
+  /* FormSubmit redirige a ?enviado=1 (campo _next) tras un envio correcto */
+  if (/[?&]enviado=1/.test(location.search)) {
+    var formStatus = document.getElementById('form-status');
+    formStatus.hidden = false;
+    contactForm.style.display = 'none';
+    document.getElementById('form-again').addEventListener('click', function(){
+      formStatus.hidden = true;
+      contactForm.style.display = '';
+    });
+    if (history.replaceState) history.replaceState(null, '', location.pathname + '#contacto');
+  }
 
 })();
 </script>
