@@ -1,0 +1,66 @@
+RECOMENDACIONES DE DISENO - aluk.raw
+Objetivo: que el sitio se vea como portafolio de fotografia y video, manteniendo el estilo editorial actual, sin que parezca una pagina "de codigo".
+
+DIAGNOSTICO
+La estructura editorial esta bien. Lo que le da aspecto de terminal o de desarrollador es la capa de adornos. Lo que mas pesa, en orden:
+
+
+1. EL ASCII DEL HERO (index.html:1086 y el script de la linea 1963)
+-------------------------------------------------------------------
+Es lo mas parecido a una terminal que hay en el sitio y tapa la mejor foto con letras. Un portafolio de foto y video tiene que abrir con la imagen limpia.
+
+Opciones:
+  - La foto a pantalla completa, sin ASCII y con menos oscurecimiento (ahora tiene brightness(.62)).
+  - Un loop de video mudo de 5 a 8 segundos con el mejor material. El comentario del hero ya deja el sitio preparado para esto.
+  - Un cambio lento entre 3 o 4 fotos.
+
+Si se quiere conservar algo del ASCII, dejarlo solo en el menu movil o quitarlo. Con la foto limpia, el nombre gigante "aluk.raw" ya da el caracter editorial.
+
+
+2. EL VERDE NEON (index.html:896-906)
+-------------------------------------
+Verde vivo sobre casi negro es la paleta de Matrix y de las terminales. Ademas las celdas se rellenan con ese verde al pasar el cursor y el logo tiene text-shadow con brillo.
+
+Cambios:
+  - Cambiar el verde por un musgo o salvia apagado (--verde-salvia, que ya existe).
+  - Quitar el brillo del logo.
+  - Que el color venga de las fotos, no de la interfaz.
+  - En el hover, invertir a blanco calido en vez de verde.
+
+
+3. LA GALERIA PARECE TABLA
+--------------------------
+Son 6 columnas de celdas pequenas con borde de 1px, un pie de foto en cada una y las fotos horizontales encerradas en marcos 4:5. Parece una hoja de calculo, no una exposicion.
+
+Cambios:
+  - Menos columnas (2 o 3) y fotos mas grandes, respetando su proporcion real (galeria "justificada" o masonry).
+  - Sin bordes entre fotos; titulo y ubicacion solo al pasar el cursor o en el visor.
+  - Agrupar por SERIES en vez de filtros sueltos: "Tokio de noche", "Kioto", "Familia". Cada serie con una portada grande y su conteo de fotos. Asi presentan su trabajo los fotografos.
+
+
+4. HABLAR EN IDIOMA DE CAMARA, NO DE TERMINAL
+---------------------------------------------
+La tipografia de etiquetas pequenas en mayusculas puede quedarse, porque es de galeria. Lo que cambia es el contenido:
+  - En vez de "templos": un pie tipo ficha, por ejemplo "kioto, 2024 - 35mm f/1.8".
+  - En el visor: contador "03 / 12" y los datos de la toma.
+  - En video: timecode (00:00:12:04), duracion y rol ("direccion, camara, edicion").
+
+
+5. LA SECCION DE VIDEO
+----------------------
+  - Un video destacado grande a todo el ancho y los demas debajo, mas pequenos.
+  - Vista previa al pasar el cursor.
+  - Recorte cinematico 2.39:1 o barras negras arriba y abajo para que se vea a pelicula de inmediato.
+
+
+6. DETALLES MENORES
+-------------------
+  - "Sobre mi" usa un puente como retrato. Una foto del autor con la camara, o una foto tomada por el de su entorno de trabajo, le da mas cara al portafolio.
+  - Los 3 servicios con iconos genericos se pueden reducir a una lista de texto, con menos peso visual.
+
+
+PRIORIDAD
+---------
+Por impacto, empezar por 1, 2 y 3. Con eso el sitio pasa de "dev con camara" a "fotografo con web".
+
+Pendiente de decidir para el hero: foto fija, rotacion de fotos o video en loop (y, si es video, cual de los tres).
