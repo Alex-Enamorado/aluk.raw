@@ -1138,11 +1138,15 @@ p{ margin:0; }
   .galeria{
     background:transparent;
     border:0;
-    gap:.75rem;
     padding-inline:8%;
   }
   .gallery-item{ border:1px solid var(--border); }
-  .video-grid{ gap:.75rem; }
+  /* separacion mayor que el margen lateral: la tarjeta vecina no asoma, asi no se
+     ve a medias el titulo o el pie de foto de la siguiente */
+  .galeria, .video-grid{ gap:10%; }
+  /* los carruseles solo se desplazan en horizontal: sin esto el navegador deja
+     un pequeño scroll vertical interno por la animacion de entrada de las tarjetas */
+  .galeria, .video-grid{ overflow-y:hidden; }
 
   .service-card{ padding:1.5rem 1.25rem 2rem; }
   .site-footer .logo.small{ font-size:clamp(3.5rem, 24vw, 6rem); }
