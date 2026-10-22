@@ -2072,7 +2072,7 @@ p{ margin:0; }
 
   function loop(t){
     if (!running) return;
-    if (t - last > 42){ last = t; draw(t); }
+    if (t - last > (W < 700 ? 66 : 50)){ last = t; draw(t); }
     requestAnimationFrame(loop);
   }
   function start(){
