@@ -1083,7 +1083,7 @@ p{ margin:0; }
 .footer-inner p{ color:rgba(246,241,228,.7); }
 
 
-/* arte ascii sobre la foto del hero; el cursor abre una lente que deja ver la foto */
+/* arte ascii sobre la foto del hero */
 .hero-media .hero-image{ filter:saturate(.9) contrast(1.04) brightness(.62); }
 .hero-ascii{
   position:absolute; inset:0;
@@ -2056,7 +2056,7 @@ p{ margin:0; }
 <script>
 /* =========================================================
    ASCII del hero: la foto convertida a caracteres, en verde,
-   con un leve movimiento y una lente que sigue al cursor.
+   con un leve movimiento.
    Si el navegador no deja leer los pixeles de la imagen, usa un
    campo de ruido animado ("nubes") en su lugar.
    ========================================================= */
@@ -2074,7 +2074,6 @@ p{ margin:0; }
   var BUCKETS = 6;
 
   var cw, ch, cols, rows, dpr, W, H, lum = null, noiseOnly = false;
-  var mouse = { x:-9999, y:-9999, on:false };
   var running = false, visible = true, last = 0;
 
   function sampleImage(){
@@ -2132,7 +2131,6 @@ p{ margin:0; }
     ctx.font = (ch - 2) + 'px ui-monospace, Menlo, Consolas, monospace';
     ctx.textBaseline = 'top';
     var time = reduceMotion ? 0 : t;
-    var R = 190, R0 = 70;
     var groups = [];
     for (var b = 0; b < BUCKETS; b++) groups.push([]);
 
@@ -2144,17 +2142,9 @@ p{ margin:0; }
         if (v < 0.12) continue;
         if (v > 1) v = 1;
         var px = x * cw, py = y * ch;
-        var f = 1;
-        if (mouse.on){
-          var dx = px + cw / 2 - mouse.x, dy = py + ch / 2 - mouse.y;
-          var dist = Math.sqrt(dx * dx + dy * dy);
-          f = dist >= R ? 1 : dist <= R0 ? 0 : (dist - R0) / (R - R0);
-          f = f * f * (3 - 2 * f);
-          if (f < 0.05) continue;
-        }
         var gi = Math.min(RAMP.length - 1, Math.floor(v * (RAMP.length - 1) + 0.5));
         if (gi === 0) continue;
-        var a = (0.12 + 0.62 * v) * f;
+        var a = 0.12 + 0.62 * v;
         var bi = Math.min(BUCKETS - 1, Math.floor(a / 0.74 * BUCKETS));
         groups[bi].push(RAMP.charAt(gi), px, py);
       }
@@ -2177,13 +2167,6 @@ p{ margin:0; }
     running = true; requestAnimationFrame(loop);
   }
   function stop(){ running = false; }
-
-  hero.addEventListener('pointermove', function(e){
-    var r = hero.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.on = true;
-    if (reduceMotion) draw(0);
-  });
-  hero.addEventListener('pointerleave', function(){ mouse.on = false; if (reduceMotion) draw(0); });
 
   if ('IntersectionObserver' in window){
     new IntersectionObserver(function(entries){
