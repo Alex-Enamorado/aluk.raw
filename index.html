@@ -419,8 +419,7 @@ p{ margin:0; }
 }
 .hero-grain{
   position:absolute; inset:0;
-  opacity:.05;
-  mix-blend-mode:overlay;
+  opacity:.04;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events:none;
 }
@@ -2286,6 +2285,22 @@ p{ margin:0; }
 
   var cw, ch, cols, rows, dpr, W, H, lum = null, noiseOnly = false;
   var running = false, visible = true, last = 0;
+  var atlas = null, aw = 0, ah = 0, colWave = null, rowWave = null;
+
+  /* un caracter de cada nivel y de cada brillo, pintados una sola vez: pintar con drawImage
+     desde este atlas cuesta mucho menos que fillText en miles de celdas por cuadro */
+  function buildAtlas(){
+    aw = Math.round(cw * dpr); ah = Math.round(ch * dpr);
+    atlas = document.createElement('canvas');
+    atlas.width = RAMP.length * aw; atlas.height = BUCKETS * ah;
+    var a = atlas.getContext('2d');
+    a.font = ((ch - 2) * dpr) + 'px ui-monospace, Menlo, Consolas, monospace';
+    a.textBaseline = 'top';
+    for (var k = 0; k < BUCKETS; k++){
+      a.fillStyle = 'rgba(' + GREEN + ',' + ((k + 1) / BUCKETS * 0.74).toFixed(2) + ')';
+      for (var g = 1; g < RAMP.length; g++) a.fillText(RAMP.charAt(g), g * aw, k * ah);
+    }
+  }
 
   function sampleImage(){
     lum = new Float32Array(cols * rows);
@@ -2325,52 +2340,47 @@ p{ margin:0; }
     var r = hero.getBoundingClientRect();
     W = Math.max(1, Math.round(r.width));
     H = Math.max(1, Math.round(r.height));
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
     cw = W < 700 ? 9 : 11;
     ch = W < 700 ? 14 : 17;
     cols = Math.ceil(W / cw);
     rows = Math.ceil(H / ch);
+    colWave = new Float32Array(cols);
+    rowWave = new Float32Array(rows);
+    buildAtlas();
     sampleImage();
     draw(performance.now());
   }
 
   function draw(t){
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
     ctx.clearRect(0, 0, W, H);
-    ctx.font = (ch - 2) + 'px ui-monospace, Menlo, Consolas, monospace';
-    ctx.textBaseline = 'top';
     var time = reduceMotion ? 0 : t;
-    var groups = [];
-    for (var b = 0; b < BUCKETS; b++) groups.push([]);
+    /* la onda es producto de una parte por columna y otra por fila: se calcula una vez por
+       columna y por fila, no por celda */
+    for (var x = 0; x < cols; x++) colWave[x] = Math.sin(x * 0.21 + time * 0.0007);
+    for (var y = 0; y < rows; y++) rowWave[y] = Math.cos(y * 0.27 - time * 0.0006);
 
-    for (var y = 0; y < rows; y++){
-      for (var x = 0; x < cols; x++){
+    for (y = 0; y < rows; y++){
+      for (x = 0; x < cols; x++){
         var v = noiseOnly ? noise(x, y, time) * 0.7 : lum[y * cols + x];
-        var n = Math.sin(x * 0.21 + time * 0.0007) * Math.cos(y * 0.27 - time * 0.0006);
-        v = v * (1 + 0.18 * n);
+        v = v * (1 + 0.18 * colWave[x] * rowWave[y]);
         if (v < 0.12) continue;
         if (v > 1) v = 1;
-        var px = x * cw, py = y * ch;
-        var gi = Math.min(RAMP.length - 1, Math.floor(v * (RAMP.length - 1) + 0.5));
-        if (gi === 0) continue;
-        var a = 0.12 + 0.62 * v;
-        var bi = Math.min(BUCKETS - 1, Math.floor(a / 0.74 * BUCKETS));
-        groups[bi].push(RAMP.charAt(gi), px, py);
+        var gi = (v * (RAMP.length - 1) + 0.5) | 0;
+        if (gi <= 0) continue;
+        var bi = ((0.12 + 0.62 * v) / 0.74 * BUCKETS) | 0;
+        if (bi > BUCKETS - 1) bi = BUCKETS - 1;
+        ctx.drawImage(atlas, gi * aw, bi * ah, aw, ah, x * cw, y * ch, cw, ch);
       }
-    }
-    for (var k = 0; k < BUCKETS; k++){
-      var g = groups[k];
-      if (!g.length) continue;
-      ctx.fillStyle = 'rgba(' + GREEN + ',' + ((k + 1) / BUCKETS * 0.74).toFixed(2) + ')';
-      for (var q = 0; q < g.length; q += 3) ctx.fillText(g[q], g[q+1], g[q+2]);
     }
   }
 
   function loop(t){
     if (!running) return;
-    if (t - last > (W < 700 ? 66 : 50)){ last = t; draw(t); }
+    if (t - last > (W < 700 ? 80 : 66)){ last = t; draw(t); }
     requestAnimationFrame(loop);
   }
   function start(){
