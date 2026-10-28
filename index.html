@@ -603,6 +603,103 @@ p{ margin:0; }
 }
 
 /* =========================================================
+   ALBUMES + FOTOS DESTACADAS
+   ========================================================= */
+.albumes{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:1px;
+  margin-top:2.5rem;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+@media (min-width:640px){ .albumes{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+
+.album-card{ display:block; width:100%; text-align:left; background:var(--bg); }
+.album-card.is-active{ outline:2px solid var(--accent); outline-offset:-2px; }
+.album-cover{ position:relative; display:block; aspect-ratio:4/3; overflow:hidden; }
+.album-cover img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:saturate(.9) brightness(.85);
+  transition:transform var(--t-slow) var(--ease), filter var(--t-slow) var(--ease);
+}
+.album-card:hover .album-cover img, .album-card:focus-visible .album-cover img{
+  transform:scale(1.03);
+  filter:saturate(1) brightness(1);
+}
+.album-meta{
+  display:flex; align-items:baseline; justify-content:space-between; gap:.5rem;
+  padding:.8rem 1rem;
+  border-top:1px solid var(--border);
+  transition:background var(--t-fast) var(--ease);
+}
+.album-name{
+  font-family:var(--font-display);
+  font-weight:400;
+  text-transform:lowercase;
+  font-size:1rem;
+  color:var(--text);
+}
+.album-total{
+  font-family:var(--font-body);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:.68rem;
+  color:var(--text-muted);
+  white-space:nowrap;
+}
+@media (hover:hover){
+  .album-card:hover .album-meta{ background:var(--fill); }
+  .album-card:hover .album-name, .album-card:hover .album-total{ color:var(--fill-ink); }
+}
+
+/* vista de un album: se abre debajo de las tarjetas */
+.album-view{ margin-top:3rem; scroll-margin-top:6rem; }
+.album-view[hidden]{ display:none; }
+.album-head{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:.5rem 1.25rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+.album-close{
+  font-family:var(--font-display);
+  font-weight:400;
+  text-transform:lowercase;
+  font-size:.9rem;
+  color:var(--text-muted);
+  transition:color var(--t-fast) var(--ease);
+}
+.album-close:hover{ color:var(--text); }
+.album-title{
+  font-family:var(--font-display);
+  font-weight:600;
+  text-transform:lowercase;
+  font-size:clamp(1.4rem, 3vw, 2rem);
+  line-height:1;
+}
+.album-count{
+  margin-left:auto;
+  font-family:var(--font-body);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:.68rem;
+  color:var(--text-muted);
+}
+
+.subsection-title{
+  margin-top:5rem;
+  padding-top:2.5rem;
+  border-top:1px solid var(--border);
+  font-family:var(--font-display);
+  font-weight:600;
+  text-transform:lowercase;
+  font-size:clamp(1.4rem, 3vw, 2rem);
+  line-height:1;
+}
+
+/* =========================================================
    LIGHTBOX
    ========================================================= */
 .lightbox{
@@ -1092,18 +1189,14 @@ p{ margin:0; }
   opacity:.3;
 }
 
-/* arte ascii decorativo: solo en los margenes vacios de pantallas anchas */
-.ascii-deco{
-  display:none;
-  position:absolute; top:7rem; margin:0;
-  font-family:ui-monospace,'Courier New',monospace;
-  font-size:.7rem; line-height:1.15; white-space:pre;
-  color:var(--accent); opacity:.28;
-  pointer-events:none; user-select:none;
+/* campo ascii de fondo: franja de lienzo anclada a la pagina (se desplaza con el contenido de
+   forma nativa, sin retraso), detras del contenido. Se anima de forma continua; ver el script. */
+.bg-ascii{
+  position:absolute; left:0; top:0;
+  width:100%;
+  z-index:1;
+  pointer-events:none;
 }
-.ascii-left{ left:1.5rem; }
-.ascii-right{ right:1.5rem; }
-@media (min-width:1720px){ .ascii-deco{ display:block; } }
 
 
 /* =========================================================
@@ -1176,6 +1269,7 @@ p{ margin:0; }
 </head>
 <body>
 <div class="page-grain" aria-hidden="true"></div>
+<canvas class="bg-ascii" id="bg-ascii" aria-hidden="true"></canvas>
 
 <a href="#contenido" class="skip-link">saltar al contenido principal</a>
 
@@ -1255,35 +1349,36 @@ p{ margin:0; }
 
 <!-- ===================== FOTOGRAFIA ===================== -->
 <section class="section" id="fotografia">
-  <pre class="ascii-deco ascii-right" aria-hidden="true">   _____  ___
-  |_____||_o_|
- .-----------------.
- | ::  .-""""-.  o |
- |    /  .--.  \   |
- |   |  ( () )  |  |
- |    \  '--'  /   |
- |     '-....-'    |
- '-----------------'</pre>
   <div class="container">
     <p class="eyebrow reveal">01 — portafolio</p>
     <h2 class="section-title" data-reveal="focus">fotografia</h2>
 
-    <div class="filters reveal" role="group" aria-label="filtrar galeria por categoria">
-      <button class="filter-btn is-active" data-filter="todas">todas</button>
-      <button class="filter-btn" data-filter="calles">calles</button>
-      <button class="filter-btn" data-filter="templos">templos</button>
-      <button class="filter-btn" data-filter="naturaleza">naturaleza</button>
-      <button class="filter-btn" data-filter="autos">autos</button>
-      <button class="filter-btn" data-filter="retratos">retratos</button>
-      <button class="filter-btn" data-filter="deportes">deportes</button>
+    <div class="albumes reveal" id="albums" aria-label="albumes de fotografia por categoria"></div>
+
+    <div class="album-view" id="album-view" hidden>
+      <div class="album-head">
+        <button class="album-close" id="album-close" type="button">← albumes</button>
+        <h3 class="album-title" id="album-title"></h3>
+        <span class="album-count" id="album-count"></span>
+      </div>
+      <p class="carousel-hint">
+        deslizá para ver más
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </p>
+      <div class="galeria" id="album-grid"></div>
     </div>
+
+    <h3 class="subsection-title reveal">fotos destacadas</h3>
 
     <p class="carousel-hint">
       deslizá para ver más
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
     </p>
 
-    <div class="galeria" id="gallery">
+    <div class="galeria" id="gallery"></div>
+
+    <!-- biblioteca con todas las fotos: no se muestra, de aqui salen los albumes y las destacadas (ver el script) -->
+    <div id="photo-library" hidden>
 
       <figure class="gallery-item reveal" data-category="templos">
         <button class="gallery-trigger" data-full="fotos/P1126408-full.webp" data-caption="torii al anochecer">
@@ -1501,12 +1596,6 @@ p{ margin:0; }
 
 <!-- ===================== VIDEOGRAFIA ===================== -->
 <section class="section section-alt" id="videografia">
-  <pre class="ascii-deco ascii-left" aria-hidden="true">    .-""""-.
-   /  .--.  \
-  |  ( () )  |
-   \  '--'  /
-    '-....-'
-   [========]</pre>
   <div class="container">
     <p class="eyebrow reveal">02 — reel</p>
     <h2 class="section-title" data-reveal="focus">videografia</h2>
@@ -1582,14 +1671,6 @@ p{ margin:0; }
 
 <!-- ===================== SOBRE MI ===================== -->
 <section class="section" id="sobre-mi">
-  <pre class="ascii-deco ascii-right" aria-hidden="true"> .---------------.
- | .    _    *   |
- |     / \       |
- |    /   \  _   |
- |   /~~~~~\/ \  |
- |  ~~~~~~~~~~~~ |
- '---------------'
-      aluk.raw</pre>
   <div class="container about-grid">
     <div class="about-media reveal">
       <img src="fotos/alex-full.webp" alt="Alex Enamorado de pie sobre un césped, con una montaña al fondo y cielo azul" loading="lazy">
@@ -1622,15 +1703,6 @@ p{ margin:0; }
 
 <!-- ===================== SERVICIOS ===================== -->
 <section class="section section-alt" id="servicios">
-  <pre class="ascii-deco ascii-left" aria-hidden="true">   _____  ___
-  |_____||_o_|
- .-----------------.
- | ::  .-""""-.  o |
- |    /  .--.  \   |
- |   |  ( () )  |  |
- |    \  '--'  /   |
- |     '-....-'    |
- '-----------------'</pre>
   <div class="container">
     <p class="eyebrow reveal">04 — lo que ofrezco</p>
     <h2 class="section-title" data-reveal="focus">servicios</h2>
@@ -1918,27 +1990,91 @@ p{ margin:0; }
     revealEls.forEach(function(el){ el.classList.add('is-visible'); });
   }
 
-  /* ---------- filtros de galeria ---------- */
-  var filterBtns = document.querySelectorAll('.filter-btn');
-  var galleryItems = document.querySelectorAll('.gallery-item');
-  var galleryEl = document.getElementById('gallery');
-  filterBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      filterBtns.forEach(function(b){ b.classList.remove('is-active'); });
-      btn.classList.add('is-active');
-      galleryEl.scrollLeft = 0;
-      var filter = btn.getAttribute('data-filter');
-      galleryItems.forEach(function(item){
-        var match = filter === 'todas' || item.getAttribute('data-category') === filter;
-        item.classList.toggle('is-hidden', !match);
-        if(match){
-          item.classList.remove('fade-in');
-          void item.offsetWidth;
-          item.classList.add('fade-in');
-        }
-      });
+  /* ---------- fotografia: albumes por categoria + fotos destacadas ----------
+     Todas las fotos viven en #photo-library (oculta). De ahi se generan las tarjetas de
+     album, la vista de cada album y la galeria de destacadas, clonando las mismas tarjetas.
+     Para cambiar las destacadas o la portada de un album, edita FEATURED y COVERS
+     (se identifican por el titulo de la foto). */
+  var ALBUMS = ['calles', 'templos', 'naturaleza', 'autos', 'retratos', 'deportes'];
+  var FEATURED = ['torii al anochecer', 'huracan nocturno', 'puente de otono', 'farolillos rojos', 'tarde en familia', 'entrada a canasta'];
+  var COVERS = {
+    calles: 'luces de neon',
+    templos: 'pabellon dorado',
+    naturaleza: 'frutos de invierno',
+    autos: 'elegancia nocturna',
+    retratos: 'tarde en familia',
+    deportes: 'salto al aro'
+  };
+
+  var libraryItems = Array.prototype.slice.call(document.querySelectorAll('#photo-library .gallery-item'));
+  var featuredEl = document.getElementById('gallery');
+  var albumsEl = document.getElementById('albums');
+  var albumView = document.getElementById('album-view');
+  var albumGrid = document.getElementById('album-grid');
+  var albumTitle = document.getElementById('album-title');
+  var albumCount = document.getElementById('album-count');
+  var albumClose = document.getElementById('album-close');
+
+  function itemCaption(item){ return item.querySelector('.gallery-trigger').getAttribute('data-caption'); }
+  /* copia de una foto de la biblioteca para mostrarla (sin la animacion de entrada por scroll) */
+  function cloneItem(item){
+    var copy = item.cloneNode(true);
+    copy.classList.remove('reveal');
+    return copy;
+  }
+  function photosOf(category){
+    return libraryItems.filter(function(item){ return item.getAttribute('data-category') === category; });
+  }
+
+  FEATURED.forEach(function(caption){
+    libraryItems.forEach(function(item){
+      if(itemCaption(item) === caption) featuredEl.appendChild(cloneItem(item));
     });
   });
+
+  ALBUMS.forEach(function(category){
+    var photos = photosOf(category);
+    if(!photos.length) return;
+    var cover = photos.filter(function(item){ return itemCaption(item) === COVERS[category]; })[0] || photos[0];
+    var coverImg = cover.querySelector('img');
+
+    var card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'album-card';
+    card.setAttribute('data-album', category);
+    card.setAttribute('aria-controls', 'album-view');
+    card.innerHTML =
+      '<span class="album-cover"><img src="' + coverImg.getAttribute('src') + '" alt="" loading="lazy"></span>' +
+      '<span class="album-meta"><span class="album-name">' + category + '</span>' +
+      '<span class="album-total">' + photos.length + (photos.length === 1 ? ' foto' : ' fotos') + '</span></span>';
+    card.addEventListener('click', function(){ openAlbum(category); });
+    albumsEl.appendChild(card);
+  });
+
+  function openAlbum(category){
+    var photos = photosOf(category);
+    albumGrid.innerHTML = '';
+    photos.forEach(function(item){
+      var copy = cloneItem(item);
+      copy.classList.add('fade-in');
+      albumGrid.appendChild(copy);
+    });
+    albumGrid.scrollLeft = 0;
+    albumTitle.textContent = category;
+    albumCount.textContent = photos.length + (photos.length === 1 ? ' foto' : ' fotos');
+    albumView.hidden = false;
+    Array.prototype.forEach.call(albumsEl.children, function(card){
+      card.classList.toggle('is-active', card.getAttribute('data-album') === category);
+    });
+    albumView.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+  function closeAlbum(){
+    albumView.hidden = true;
+    albumGrid.innerHTML = '';
+    Array.prototype.forEach.call(albumsEl.children, function(card){ card.classList.remove('is-active'); });
+    albumsEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+  }
+  albumClose.addEventListener('click', closeAlbum);
 
   /* ---------- lightbox de fotografia ---------- */
   var lightbox = document.getElementById('lightbox');
@@ -1947,16 +2083,19 @@ p{ margin:0; }
   var lightboxClose = document.getElementById('lightbox-close');
   var lightboxPrev = document.getElementById('lightbox-prev');
   var lightboxNext = document.getElementById('lightbox-next');
-  var triggers = Array.prototype.slice.call(document.querySelectorAll('.gallery-trigger'));
+  var lightboxList = [];
   var currentIndex = -1;
   var lastFocusedEl = null;
 
-  function openLightbox(index){
+  function showPhoto(index){
     currentIndex = index;
-    var trigger = triggers[index];
+    var trigger = lightboxList[index];
     lightboxImage.src = trigger.getAttribute('data-full');
     lightboxImage.alt = trigger.getAttribute('data-caption') || '';
     lightboxCaption.textContent = trigger.getAttribute('data-caption') || '';
+  }
+  function openLightbox(index){
+    showPhoto(index);
     lastFocusedEl = document.activeElement;
     lightbox.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -1968,18 +2107,17 @@ p{ margin:0; }
     if(lastFocusedEl) lastFocusedEl.focus();
   }
   function showRelative(step){
-    var visible = triggers.filter(function(t){ return !t.closest('.gallery-item').classList.contains('is-hidden'); });
-    var pos = visible.indexOf(triggers[currentIndex]);
-    var nextPos = (pos + step + visible.length) % visible.length;
-    var nextTrigger = visible[nextPos];
-    currentIndex = triggers.indexOf(nextTrigger);
-    lightboxImage.src = nextTrigger.getAttribute('data-full');
-    lightboxImage.alt = nextTrigger.getAttribute('data-caption') || '';
-    lightboxCaption.textContent = nextTrigger.getAttribute('data-caption') || '';
+    showPhoto((currentIndex + step + lightboxList.length) % lightboxList.length);
   }
 
-  triggers.forEach(function(trigger, i){
-    trigger.addEventListener('click', function(){ openLightbox(i); });
+  /* las fotos se generan al abrir un album, asi que el clic se atiende en el contenedor;
+     el visor recorre solo las fotos de la galeria donde se hizo clic (un album o las destacadas) */
+  document.getElementById('fotografia').addEventListener('click', function(e){
+    var trigger = e.target.closest('.gallery-trigger');
+    var grid = trigger && trigger.closest('.galeria');
+    if(!grid) return;
+    lightboxList = Array.prototype.slice.call(grid.querySelectorAll('.gallery-trigger'));
+    openLightbox(lightboxList.indexOf(trigger));
   });
   lightboxClose.addEventListener('click', closeLightbox);
   lightboxPrev.addEventListener('click', function(){ showRelative(-1); });
@@ -2228,6 +2366,155 @@ p{ margin:0; }
   function init(){ resize(); start(); }
   if (img.complete && img.naturalWidth) init();
   else { img.addEventListener('load', init); img.addEventListener('error', init); }
+})();
+</script>
+
+<script>
+/* ASCII de fondo: campo de caracteres en movimiento continuo detras de la pagina.
+   El lienzo es una franja un poco mas alta que la pantalla, anclada a la pagina: el navegador
+   la desplaza con el contenido (sin retraso) y solo se mueve de sitio cuando el scroll se
+   acerca a su borde. Para que pese poco, cada caracter se pinta con drawImage desde un atlas
+   ya renderizado (en vez de fillText), a ~20 fps y solo mientras esta a la vista.
+   Va fuerte en los margenes libres y muy tenue detras del contenido. Empieza bajo el hero,
+   que ya tiene su propio ascii. */
+(function(){
+  "use strict";
+  var canvas = document.getElementById('bg-ascii');
+  var hero = document.getElementById('inicio');
+  if (!canvas || !canvas.getContext) return;
+
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var RAMP = ' .:-=+*#%@';
+  var BUCKETS = 5;
+  var CONTAINER = 1360;
+  var FRAME_MS = 62;
+  var root = document.documentElement;
+
+  /* tabla de senos: mas barata que Math.sin en miles de celdas por cuadro */
+  var SIN = new Float32Array(1024), K = 1024 / (Math.PI * 2);
+  for (var s = 0; s < 1024; s++) SIN[s] = Math.sin(s / K);
+  function fsin(a){ return SIN[(a * K | 0) & 1023]; }
+
+  var W, H, BH, cw, ch, cols, rows, anchor = 0, heroBottom = 0, colE = [];
+  var rgb = '124,179,80', atlas = null;
+  var running = false, last = 0;
+
+  function readColor(){
+    var c = getComputedStyle(root).getPropertyValue('--glow-color').trim();
+    if (c) rgb = c;
+  }
+
+  /* un caracter de cada nivel y de cada brillo, pintados una sola vez */
+  function buildAtlas(){
+    atlas = document.createElement('canvas');
+    atlas.width = RAMP.length * cw; atlas.height = BUCKETS * ch;
+    var a = atlas.getContext('2d');
+    a.font = (ch - 3) + 'px ui-monospace, Menlo, Consolas, monospace';
+    a.textBaseline = 'top';
+    for (var k = 0; k < BUCKETS; k++){
+      a.fillStyle = 'rgba(' + rgb + ',' + ((k + 1) / BUCKETS * 0.38).toFixed(2) + ')';
+      for (var g = 1; g < RAMP.length; g++) a.fillText(RAMP.charAt(g), g * cw, k * ch);
+    }
+  }
+
+  /* 0 detras del contenido (casi), 1 en el margen libre */
+  function buildColumns(){
+    var half = Math.min(CONTAINER, W) / 2;
+    colE = [];
+    for (var x = 0; x < cols; x++){
+      var d = Math.abs(x * cw + cw / 2 - W / 2) - half;
+      var e = 0.12 + 0.88 * Math.min(1, Math.max(0, d / 140 + 0.5));
+      /* en pantallas anchas el centro (casi apagado) ni se pinta: ahorra la mayor parte del trabajo */
+      colE.push(W >= 1500 && e < 0.2 ? 0 : e);
+    }
+  }
+
+  function docHeight(){ return Math.max(H, document.body.offsetHeight); }
+
+  function place(){
+    var sy = window.scrollY;
+    var want = Math.floor((sy - (BH - H) / 2) / ch) * ch;
+    anchor = Math.max(0, Math.min(want, Math.floor((docHeight() - BH) / ch) * ch));
+    canvas.style.top = anchor + 'px';
+  }
+  function nearEdge(){
+    var sy = window.scrollY, slack = (BH - H) * 0.4;
+    return (sy < anchor + slack && anchor > 0) ||
+           (sy + H > anchor + BH - slack && anchor + BH < docHeight());
+  }
+
+  function resize(){
+    W = window.innerWidth; H = window.innerHeight;
+    cw = W < 700 ? 12 : 14;
+    ch = W < 700 ? 19 : 22;
+    cols = Math.ceil(W / cw);
+    rows = Math.ceil(H * 1.6 / ch);
+    BH = rows * ch;
+    canvas.width = W; canvas.height = BH;
+    canvas.style.height = BH + 'px';
+    heroBottom = hero ? hero.offsetHeight : 0;
+    buildColumns(); buildAtlas(); place();
+    draw(performance.now());
+    sync();
+  }
+
+  function draw(t){
+    ctx.clearRect(0, 0, W, BH);
+    var time = reduceMotion ? 0 : t, ta = time * 0.00035, tb = time * 0.00028, tc = time * 0.0002;
+    var row0 = Math.round(anchor / ch);
+    for (var y = 0; y < rows; y++){
+      var py = y * ch;
+      if (anchor + py + ch < heroBottom) continue;
+      var gy = row0 + y;
+      var rs = fsin(gy * 0.081 + tc) * 2, rc = gy * 0.15 - tb;
+      for (var x = 0; x < cols; x++){
+        var e = colE[x];
+        if (!e) continue;
+        /* ondas que se cruzan: se leen como humo / olas de caracteres */
+        var v = 0.5 + 0.25 * fsin(x * 0.105 + ta + rs) + 0.25 * fsin(rc + x * 0.047 + 1.5708);
+        v = (v - 0.35) * 1.8;
+        if (v <= 0) continue;
+        if (v > 1) v = 1;
+        v *= e;
+        var gi = (v * (RAMP.length - 1) + 0.5) | 0;
+        if (gi <= 0) continue;
+        var bi = (v * BUCKETS) | 0;
+        if (bi > BUCKETS - 1) bi = BUCKETS - 1;
+        ctx.drawImage(atlas, gi * cw, bi * ch, cw, ch, x * cw, py, cw, ch);
+      }
+    }
+  }
+
+  /* solo corre si la franja tiene algo por debajo del hero a la vista */
+  function visible(){ return window.scrollY + H > heroBottom; }
+  function loop(t){
+    if (!running) return;
+    if (!visible() || document.hidden){ running = false; return; }
+    if (nearEdge()){ place(); last = t; draw(t); }
+    if (t - last > FRAME_MS){ last = t; draw(t); }
+    requestAnimationFrame(loop);
+  }
+  function sync(){
+    if (reduceMotion){ if (nearEdge()) place(); draw(0); return; }
+    if (!running && visible() && !document.hidden){ running = true; requestAnimationFrame(loop); }
+  }
+
+  /* al reposicionar la franja se redibuja en el acto: si no, se veria un cuadro con el contenido desplazado */
+  function onScroll(){
+    if (nearEdge()){ place(); last = performance.now(); draw(last); }
+    sync();
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  document.addEventListener('visibilitychange', sync);
+  new MutationObserver(function(){ readColor(); buildAtlas(); draw(performance.now()); })
+    .observe(root, { attributes:true, attributeFilter:['data-theme'] });
+
+  var rt;
+  window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(resize, 150); });
+  window.addEventListener('load', function(){ if (hero) heroBottom = hero.offsetHeight; });
+
+  readColor(); resize();
 })();
 </script>
 
