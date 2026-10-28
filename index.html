@@ -961,17 +961,6 @@ p{ margin:0; }
 }
 .footer-inner p{ font-size:.85rem; color:rgba(246,241,228,.75); }
 
-/* textura de grano sobre toda la pagina: posicion absoluta (no fixed) y sin
-   mix-blend-mode para que el navegador la pinte una sola vez y no tenga que
-   recalcular el blend en cada frame de scroll (eso era lo que iba lento). */
-.page-grain{
-  position:absolute; inset:0;
-  z-index:5;
-  opacity:.03;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
 /* =========================================================
    ESTILO EDITORIAL: titulares enormes y apretados, etiquetas
    diminutas en mayusculas, secciones numeradas, lineas finas,
@@ -1260,7 +1249,6 @@ p{ margin:0; }
 </style>
 </head>
 <body>
-<div class="page-grain" aria-hidden="true"></div>
 <canvas class="bg-ascii" id="bg-ascii" aria-hidden="true"></canvas>
 
 <a href="#contenido" class="skip-link">saltar al contenido principal</a>
@@ -2379,13 +2367,22 @@ p{ margin:0; }
     }
   }
 
+  /* se adapta al equipo: si dibujar un cuadro tarda, se espera mas entre cuadros (el trabajo
+     nunca pasa de ~1/6 del tiempo) y si tarda demasiado la animacion se detiene en el ultimo cuadro */
+  var cost = 0, frozen = false;
   function loop(t){
     if (!running) return;
-    if (t - last > (W < 700 ? 90 : 83)){ last = t; draw(t); }
+    if (t - last > Math.max(W < 700 ? 90 : 83, cost * 6)){
+      last = t;
+      var t0 = performance.now();
+      draw(t);
+      cost = cost * 0.7 + (performance.now() - t0) * 0.3;
+      if (cost > 30){ frozen = true; running = false; return; }
+    }
     requestAnimationFrame(loop);
   }
   function start(){
-    if (reduceMotion || running || !visible || document.hidden) return;
+    if (reduceMotion || frozen || running || !visible || document.hidden) return;
     running = true; requestAnimationFrame(loop);
   }
   function stop(){ running = false; }
@@ -2436,7 +2433,7 @@ p{ margin:0; }
 
   var W, H, BH, cw, ch, cols, rows, anchor = 0, heroBottom = 0, colE = [];
   var rgb = '124,179,80', atlas = null;
-  var running = false, last = 0;
+  var running = false, last = 0, cost = 0, frozen = false;
 
   function readColor(){
     var c = getComputedStyle(root).getPropertyValue('--glow-color').trim();
@@ -2530,12 +2527,20 @@ p{ margin:0; }
     if (!running) return;
     if (!visible() || document.hidden){ running = false; return; }
     if (nearEdge()){ place(); last = t; draw(t); }
-    if (t - last > FRAME_MS){ last = t; draw(t); }
+    /* se adapta al equipo: si dibujar un cuadro tarda, se espera mas entre cuadros (el trabajo
+       nunca pasa de ~1/6 del tiempo) y si tarda demasiado la animacion se detiene en el ultimo cuadro */
+    if (t - last > Math.max(FRAME_MS, cost * 6)){
+      last = t;
+      var t0 = performance.now();
+      draw(t);
+      cost = cost * 0.7 + (performance.now() - t0) * 0.3;
+      if (cost > 30){ frozen = true; running = false; return; }
+    }
     requestAnimationFrame(loop);
   }
   function sync(){
     if (reduceMotion){ if (nearEdge()) place(); draw(0); return; }
-    if (!running && visible() && !document.hidden){ running = true; requestAnimationFrame(loop); }
+    if (!running && !frozen && visible() && !document.hidden){ running = true; requestAnimationFrame(loop); }
   }
 
   /* al reposicionar la franja se redibuja en el acto: si no, se veria un cuadro con el contenido desplazado */
