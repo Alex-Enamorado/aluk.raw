@@ -713,12 +713,6 @@ p{ margin:0; }
   max-width:min(92vw, 68rem);
   max-height:78vh;
 }
-.lightbox-caption{
-  position:absolute; bottom:2.5rem; left:0; right:0;
-  text-align:center;
-  color:var(--blanco-calido);
-  font-family:var(--font-body);
-}
 .lightbox-close, .lightbox-prev, .lightbox-next{
   position:absolute;
   width:3rem; height:3rem;
@@ -1130,7 +1124,6 @@ p{ margin:0; }
   .gallery-item:hover .gallery-caption-title,
   .gallery-item:hover .gallery-caption-tag{ color:var(--fill-ink); }
 }
-
 /* videos */
 .video-trigger{ border-radius:0; }
 .play-icon span{ border-radius:0; }
@@ -1382,7 +1375,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="templos">
         <button class="gallery-trigger" data-full="fotos/P1126408-full.webp" data-caption="torii al anochecer">
-          <span class="frame"><img src="fotos/P1126408-grid.webp" alt="Torii rojo flotando sobre el agua al anochecer, con montañas al fondo" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1126408-thumb.webp" srcset="fotos/P1126408-thumb.webp 480w, fotos/P1126408-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Torii rojo flotando sobre el agua al anochecer, con montañas al fondo" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">torii al anochecer</span>
@@ -1392,7 +1385,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="autos">
         <button class="gallery-trigger" data-full="fotos/P1103197-full.webp" data-caption="huracan nocturno">
-          <span class="frame"><img src="fotos/P1103197-grid.webp" alt="Lamborghini Huracán gris estacionado de noche bajo un paso elevado en Tokio" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1103197-thumb.webp" srcset="fotos/P1103197-thumb.webp 480w, fotos/P1103197-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Lamborghini Huracán gris estacionado de noche bajo un paso elevado en Tokio" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">huracan nocturno</span>
@@ -1402,7 +1395,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="naturaleza">
         <button class="gallery-trigger" data-full="fotos/P1103315-full.webp" data-caption="frutos de invierno">
-          <span class="frame"><img src="fotos/P1103315-grid.webp" alt="Rama con frutos rojos de invierno contra un cielo azul intenso" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1103315-thumb.webp" srcset="fotos/P1103315-thumb.webp 480w, fotos/P1103315-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Rama con frutos rojos de invierno contra un cielo azul intenso" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">frutos de invierno</span>
@@ -1412,7 +1405,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="calles">
         <button class="gallery-trigger" data-full="fotos/P1103685-full.webp" data-caption="mascara en la vitrina">
-          <span class="frame"><img src="fotos/P1103685-grid.webp" alt="Máscara tradicional japonesa iluminada sobre fondo negro en un escaparate" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1103685-thumb.webp" srcset="fotos/P1103685-thumb.webp 480w, fotos/P1103685-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Máscara tradicional japonesa iluminada sobre fondo negro en un escaparate" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">mascara en la vitrina</span>
@@ -1422,7 +1415,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="autos">
         <button class="gallery-trigger" data-full="fotos/P1114259-Enhanced-NR-full.webp" data-caption="elegancia nocturna">
-          <span class="frame"><img src="fotos/P1114259-Enhanced-NR-grid.webp" alt="Aston Martin verde azulado estacionado de noche en una calle de Tokio" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1114259-Enhanced-NR-thumb.webp" srcset="fotos/P1114259-Enhanced-NR-thumb.webp 480w, fotos/P1114259-Enhanced-NR-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Aston Martin verde azulado estacionado de noche en una calle de Tokio" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">elegancia nocturna</span>
@@ -1432,7 +1425,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="calles">
         <button class="gallery-trigger" data-full="fotos/P1114279-full.webp" data-caption="puerta nocturna">
-          <span class="frame"><img src="fotos/P1114279-grid.webp" alt="Entrada iluminada de un barrio chino al anochecer, con carteles de neón" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1114279-thumb.webp" srcset="fotos/P1114279-thumb.webp 480w, fotos/P1114279-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Entrada iluminada de un barrio chino al anochecer, con carteles de neón" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">puerta nocturna</span>
@@ -1442,7 +1435,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="calles">
         <button class="gallery-trigger" data-full="fotos/P1114318-full.webp" data-caption="farolillos rojos">
-          <span class="frame"><img src="fotos/P1114318-grid.webp" alt="Hilera de farolillos rojos colgando sobre una calle comercial nocturna" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1114318-thumb.webp" srcset="fotos/P1114318-thumb.webp 480w, fotos/P1114318-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Hilera de farolillos rojos colgando sobre una calle comercial nocturna" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">farolillos rojos</span>
@@ -1452,7 +1445,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="calles">
         <button class="gallery-trigger" data-full="fotos/P1114453-full.webp" data-caption="luces de neon">
-          <span class="frame"><img src="fotos/P1114453-grid.webp" alt="Fachada de un restaurante japonés cubierta de carteles y luces de neón" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1114453-thumb.webp" srcset="fotos/P1114453-thumb.webp 480w, fotos/P1114453-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Fachada de un restaurante japonés cubierta de carteles y luces de neón" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">luces de neon</span>
@@ -1462,7 +1455,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="templos">
         <button class="gallery-trigger" data-full="fotos/P1114649-full.webp" data-caption="gatos de la fortuna">
-          <span class="frame"><img src="fotos/P1114649-grid.webp" alt="Decenas de figuras de gatos maneki-neko blancos en un templo" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1114649-thumb.webp" srcset="fotos/P1114649-thumb.webp 480w, fotos/P1114649-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Decenas de figuras de gatos maneki-neko blancos en un templo" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">gatos de la fortuna</span>
@@ -1472,7 +1465,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="retratos">
         <button class="gallery-trigger" data-full="fotos/P1125509-full.webp" data-caption="tarde en familia">
-          <span class="frame"><img src="fotos/P1125509-grid.webp" alt="Familia compartiendo un momento espontáneo en un parque" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1125509-thumb.webp" srcset="fotos/P1125509-thumb.webp 480w, fotos/P1125509-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Familia compartiendo un momento espontáneo en un parque" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">tarde en familia</span>
@@ -1482,7 +1475,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="templos">
         <button class="gallery-trigger" data-full="fotos/P1125838-full.webp" data-caption="pabellon dorado">
-          <span class="frame"><img src="fotos/P1125838-grid.webp" alt="Pabellón dorado reflejado en el agua de un estanque en Kioto" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1125838-thumb.webp" srcset="fotos/P1125838-thumb.webp 480w, fotos/P1125838-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Pabellón dorado reflejado en el agua de un estanque en Kioto" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">pabellon dorado</span>
@@ -1492,7 +1485,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="templos">
         <button class="gallery-trigger" data-full="fotos/P1126101-full.webp" data-caption="pagoda entre arboles">
-          <span class="frame"><img src="fotos/P1126101-grid.webp" alt="Pagoda de cinco pisos asomando entre árboles" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1126101-thumb.webp" srcset="fotos/P1126101-thumb.webp 480w, fotos/P1126101-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Pagoda de cinco pisos asomando entre árboles" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">pagoda entre arboles</span>
@@ -1502,7 +1495,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="naturaleza">
         <button class="gallery-trigger" data-full="fotos/P1126211-full.webp" data-caption="puente de otono">
-          <span class="frame"><img src="fotos/P1126211-grid.webp" alt="Puente rojo entre árboles con follaje de otoño" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1126211-thumb.webp" srcset="fotos/P1126211-thumb.webp 480w, fotos/P1126211-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Puente rojo entre árboles con follaje de otoño" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">puente de otono</span>
@@ -1512,7 +1505,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000627-full.webp" data-caption="entrada a canasta">
-          <span class="frame"><img src="fotos/P1000627-grid.webp" alt="Jugador de azul y blanco en el aire entre rivales a punto de anotar, con un árbitro en primer plano" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000627-thumb.webp" srcset="fotos/P1000627-thumb.webp 480w, fotos/P1000627-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco en el aire entre rivales a punto de anotar, con un árbitro en primer plano" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">entrada a canasta</span>
@@ -1522,7 +1515,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000410-full.webp" data-caption="bandeja al aro">
-          <span class="frame"><img src="fotos/P1000410-grid.webp" alt="Jugador de azul y blanco subiendo a la bandeja bajo el aro, con rivales debajo y público al fondo" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000410-thumb.webp" srcset="fotos/P1000410-thumb.webp 480w, fotos/P1000410-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco subiendo a la bandeja bajo el aro, con rivales debajo y público al fondo" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">bandeja al aro</span>
@@ -1532,7 +1525,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000467-full.webp" data-caption="tiro libre">
-          <span class="frame"><img src="fotos/P1000467-grid.webp" alt="Jugador de azul y blanco con el brazo en alto después de lanzar un tiro libre, con el balón en el aire" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000467-thumb.webp" srcset="fotos/P1000467-thumb.webp 480w, fotos/P1000467-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco con el brazo en alto después de lanzar un tiro libre, con el balón en el aire" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">tiro libre</span>
@@ -1542,7 +1535,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000524-full.webp" data-caption="regate">
-          <span class="frame"><img src="fotos/P1000524-grid.webp" alt="Jugador de azul y blanco driblando el balón frente a un defensor en una cancha de duela" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000524-thumb.webp" srcset="fotos/P1000524-thumb.webp 480w, fotos/P1000524-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco driblando el balón frente a un defensor en una cancha de duela" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">regate</span>
@@ -1552,7 +1545,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000585-full.webp" data-caption="en carrera">
-          <span class="frame"><img src="fotos/P1000585-grid.webp" alt="Jugador de azul y blanco avanzando con el balón en la mano, con la mirada al frente" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000585-thumb.webp" srcset="fotos/P1000585-thumb.webp 480w, fotos/P1000585-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco avanzando con el balón en la mano, con la mirada al frente" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">en carrera</span>
@@ -1562,7 +1555,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000601-full.webp" data-caption="salto al aro">
-          <span class="frame"><img src="fotos/P1000601-grid.webp" alt="Jugador de azul y blanco saltando hacia el aro para encestar, con el balón sobre la cabeza" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000601-thumb.webp" srcset="fotos/P1000601-thumb.webp 480w, fotos/P1000601-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco saltando hacia el aro para encestar, con el balón sobre la cabeza" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">salto al aro</span>
@@ -1572,7 +1565,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000658-full.webp" data-caption="antes del tiro">
-          <span class="frame"><img src="fotos/P1000658-grid.webp" alt="Jugador de azul y blanco con la rodilla levantada preparando el tiro, marcado por un rival de negro" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000658-thumb.webp" srcset="fotos/P1000658-thumb.webp 480w, fotos/P1000658-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco con la rodilla levantada preparando el tiro, marcado por un rival de negro" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">antes del tiro</span>
@@ -1582,7 +1575,7 @@ p{ margin:0; }
 
       <figure class="gallery-item reveal" data-category="deportes">
         <button class="gallery-trigger" data-full="fotos/P1000667-full.webp" data-caption="tiro en suspension">
-          <span class="frame"><img src="fotos/P1000667-grid.webp" alt="Jugador de azul y blanco lanzando en suspensión con un defensor que intenta taparlo" loading="lazy"></span>
+          <span class="frame"><img src="fotos/P1000667-thumb.webp" srcset="fotos/P1000667-thumb.webp 480w, fotos/P1000667-grid.webp 900w" sizes="(max-width:639px) 84vw, (max-width:1023px) 25vw, (max-width:1359px) 20vw, 227px" alt="Jugador de azul y blanco lanzando en suspensión con un defensor que intenta taparlo" loading="lazy"></span>
         </button>
         <figcaption class="gallery-caption">
           <span class="gallery-caption-title">tiro en suspension</span>
@@ -1862,7 +1855,6 @@ p{ margin:0; }
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
   </button>
   <img class="lightbox-image" id="lightbox-image" src="" alt="">
-  <p class="lightbox-caption" id="lightbox-caption"></p>
   <button class="lightbox-next" id="lightbox-next" aria-label="siguiente imagen">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg>
   </button>
@@ -2017,9 +2009,16 @@ p{ margin:0; }
 
   function itemCaption(item){ return item.querySelector('.gallery-trigger').getAttribute('data-caption'); }
   /* copia de una foto de la biblioteca para mostrarla (sin la animacion de entrada por scroll) */
-  function cloneItem(item){
+  function cloneItem(item, eager){
     var copy = item.cloneNode(true);
     copy.classList.remove('reveal');
+    /* eager = pedir las imagenes de inmediato, sin esperar a que lleguen a pantalla */
+    if(eager){
+      Array.prototype.forEach.call(copy.querySelectorAll('img'), function(img){
+        img.loading = 'eager';
+        img.decoding = 'async';
+      });
+    }
     return copy;
   }
   function photosOf(category){
@@ -2044,18 +2043,36 @@ p{ margin:0; }
     card.setAttribute('data-album', category);
     card.setAttribute('aria-controls', 'album-view');
     card.innerHTML =
-      '<span class="album-cover"><img src="' + coverImg.getAttribute('src') + '" alt="" loading="lazy"></span>' +
+      '<span class="album-cover"><img src="' + coverImg.getAttribute('src') + '" srcset="' + coverImg.getAttribute('srcset') +
+      '" sizes="(max-width:639px) 50vw, (max-width:1359px) 33vw, 450px" alt="" loading="eager" decoding="async" fetchpriority="low"></span>' +
       '<span class="album-meta"><span class="album-name">' + category + '</span>' +
       '<span class="album-total">' + photos.length + (photos.length === 1 ? ' foto' : ' fotos') + '</span></span>';
     card.addEventListener('click', function(){ openAlbum(category); });
+    /* al acercar el puntero (o tocar) se empiezan a bajar las fotos del album: ya estan al abrirlo */
+    ['pointerenter', 'focus', 'touchstart'].forEach(function(type){
+      card.addEventListener(type, function(){ preloadAlbum(category); }, { passive:true });
+    });
     albumsEl.appendChild(card);
   });
+
+  var preloadedAlbums = {};
+  function preloadAlbum(category){
+    if(preloadedAlbums[category]) return;
+    preloadedAlbums[category] = photosOf(category).map(function(item){
+      var shown = item.querySelector('img'), img = new Image();
+      img.sizes = shown.sizes; img.srcset = shown.srcset; img.src = shown.src;
+      return img;
+    });
+  }
 
   function openAlbum(category){
     var photos = photosOf(category);
     albumGrid.innerHTML = '';
     photos.forEach(function(item){
-      var copy = cloneItem(item);
+      var copy = cloneItem(item, true);
+      /* dentro de un album las tarjetas solo llevan la categoria; el titulo se ve en las destacadas */
+      var title = copy.querySelector('.gallery-caption-title');
+      if(title) title.remove();
       copy.classList.add('fade-in');
       albumGrid.appendChild(copy);
     });
@@ -2079,7 +2096,6 @@ p{ margin:0; }
   /* ---------- lightbox de fotografia ---------- */
   var lightbox = document.getElementById('lightbox');
   var lightboxImage = document.getElementById('lightbox-image');
-  var lightboxCaption = document.getElementById('lightbox-caption');
   var lightboxClose = document.getElementById('lightbox-close');
   var lightboxPrev = document.getElementById('lightbox-prev');
   var lightboxNext = document.getElementById('lightbox-next');
@@ -2087,12 +2103,23 @@ p{ margin:0; }
   var currentIndex = -1;
   var lastFocusedEl = null;
 
+  /* la foto grande de al lado se baja de antemano: al pasar con las flechas ya esta lista */
+  var fullCache = {};
+  function preloadFull(index){
+    var neighbor = lightboxList[(index + lightboxList.length) % lightboxList.length];
+    var url = neighbor && neighbor.getAttribute('data-full');
+    if(!url || fullCache[url]) return;
+    fullCache[url] = new Image();
+    fullCache[url].src = url;
+  }
+
   function showPhoto(index){
     currentIndex = index;
     var trigger = lightboxList[index];
     lightboxImage.src = trigger.getAttribute('data-full');
     lightboxImage.alt = trigger.getAttribute('data-caption') || '';
-    lightboxCaption.textContent = trigger.getAttribute('data-caption') || '';
+    preloadFull(index + 1);
+    preloadFull(index - 1);
   }
   function openLightbox(index){
     showPhoto(index);
