@@ -1089,7 +1089,21 @@ p{ margin:0; }
   position:absolute; inset:0;
   width:100%; height:100%;
   pointer-events:none;
+  opacity:.3;
 }
+
+/* arte ascii decorativo: solo en los margenes vacios de pantallas anchas */
+.ascii-deco{
+  display:none;
+  position:absolute; top:7rem; margin:0;
+  font-family:ui-monospace,'Courier New',monospace;
+  font-size:.7rem; line-height:1.15; white-space:pre;
+  color:var(--accent); opacity:.28;
+  pointer-events:none; user-select:none;
+}
+.ascii-left{ left:1.5rem; }
+.ascii-right{ right:1.5rem; }
+@media (min-width:1720px){ .ascii-deco{ display:block; } }
 
 
 /* =========================================================
@@ -1241,6 +1255,15 @@ p{ margin:0; }
 
 <!-- ===================== FOTOGRAFIA ===================== -->
 <section class="section" id="fotografia">
+  <pre class="ascii-deco ascii-right" aria-hidden="true">   _____  ___
+  |_____||_o_|
+ .-----------------.
+ | ::  .-""""-.  o |
+ |    /  .--.  \   |
+ |   |  ( () )  |  |
+ |    \  '--'  /   |
+ |     '-....-'    |
+ '-----------------'</pre>
   <div class="container">
     <p class="eyebrow reveal">01 — portafolio</p>
     <h2 class="section-title" data-reveal="focus">fotografia</h2>
@@ -1478,6 +1501,12 @@ p{ margin:0; }
 
 <!-- ===================== VIDEOGRAFIA ===================== -->
 <section class="section section-alt" id="videografia">
+  <pre class="ascii-deco ascii-left" aria-hidden="true">    .-""""-.
+   /  .--.  \
+  |  ( () )  |
+   \  '--'  /
+    '-....-'
+   [========]</pre>
   <div class="container">
     <p class="eyebrow reveal">02 — reel</p>
     <h2 class="section-title" data-reveal="focus">videografia</h2>
@@ -1553,6 +1582,14 @@ p{ margin:0; }
 
 <!-- ===================== SOBRE MI ===================== -->
 <section class="section" id="sobre-mi">
+  <pre class="ascii-deco ascii-right" aria-hidden="true"> .---------------.
+ | .    _    *   |
+ |     / \       |
+ |    /   \  _   |
+ |   /~~~~~\/ \  |
+ |  ~~~~~~~~~~~~ |
+ '---------------'
+      aluk.raw</pre>
   <div class="container about-grid">
     <div class="about-media reveal">
       <img src="fotos/alex-full.webp" alt="Alex Enamorado de pie sobre un césped, con una montaña al fondo y cielo azul" loading="lazy">
@@ -1585,6 +1622,15 @@ p{ margin:0; }
 
 <!-- ===================== SERVICIOS ===================== -->
 <section class="section section-alt" id="servicios">
+  <pre class="ascii-deco ascii-left" aria-hidden="true">   _____  ___
+  |_____||_o_|
+ .-----------------.
+ | ::  .-""""-.  o |
+ |    /  .--.  \   |
+ |   |  ( () )  |  |
+ |    \  '--'  /   |
+ |     '-....-'    |
+ '-----------------'</pre>
   <div class="container">
     <p class="eyebrow reveal">04 — lo que ofrezco</p>
     <h2 class="section-title" data-reveal="focus">servicios</h2>
