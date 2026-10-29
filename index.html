@@ -616,7 +616,7 @@ p{ margin:0; }
 
 .album-card{ display:block; width:100%; text-align:left; background:var(--bg); }
 .album-card.is-active{ outline:2px solid var(--accent); outline-offset:-2px; }
-.album-cover{ position:relative; display:block; aspect-ratio:4/5; overflow:hidden; }
+.album-cover{ position:relative; display:block; aspect-ratio:4/3; overflow:hidden; }
 .album-cover img{
   position:absolute; inset:0;
   width:100%; height:100%;
@@ -2268,7 +2268,9 @@ p{ margin:0; }
     var photos = photosOf(category);
     if(!photos.length) return;
     var cover = photos.filter(function(item){ return itemCaption(item) === COVERS[category]; })[0] || photos[0];
-    var coverImg = cover.querySelector('img');
+    /* las portadas se ven grandes y recortadas: usan la version grid/full en vez de la miniatura */
+    var coverFull = cover.querySelector('.gallery-trigger').getAttribute('data-full');
+    var coverGrid = coverFull.replace('-full.webp', '-grid.webp');
 
     var card = document.createElement('button');
     card.type = 'button';
@@ -2276,8 +2278,8 @@ p{ margin:0; }
     card.setAttribute('data-album', category);
     card.setAttribute('aria-controls', 'album-view');
     card.innerHTML =
-      '<span class="album-cover"><img src="' + coverImg.getAttribute('src') + '" srcset="' + coverImg.getAttribute('srcset') +
-      '" sizes="(max-width:639px) 50vw, (max-width:1359px) 33vw, 450px" alt="" loading="eager" decoding="async" fetchpriority="low"></span>' +
+      '<span class="album-cover"><img src="' + coverGrid + '" srcset="' + coverGrid + ' 900w, ' + coverFull +
+      ' 1900w" sizes="(max-width:639px) 50vw, (max-width:1359px) 50vw, 640px" alt="" loading="eager" decoding="async" fetchpriority="low"></span>' +
       '<span class="album-meta"><span class="album-name">' + category + '</span>' +
       '<span class="album-total">' + photos.length + (photos.length === 1 ? ' foto' : ' fotos') + '</span></span>';
     card.addEventListener('click', function(){ openAlbum(category); });
