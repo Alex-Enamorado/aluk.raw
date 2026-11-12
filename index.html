@@ -1292,9 +1292,11 @@ p{ margin:0; }
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="inicio">
   <div class="hero-media" aria-hidden="true">
-    <!-- TODO: si quieres cambiar la foto de portada, reemplaza esta imagen.
-         Para usar video: <video class="hero-image" autoplay muted loop playsinline poster="..."><source src="videos/hero.mp4" type="video/mp4"></video> -->
-    <img class="hero-image" src="fotos/P1126408-full.webp" alt="" loading="eager">
+    <!-- Video de fondo: montaje corto y silencioso en bucle, sin caras ni textos (planos de manos
+         y instrumentos de daydrinking). Para cambiarlo, apunta source y poster a otro clip de videos/web. -->
+    <video class="hero-image" autoplay muted loop playsinline preload="auto" poster="videos/web/daydrinking-hero-poster.jpg">
+      <source src="videos/web/daydrinking-hero.mp4" type="video/mp4">
+    </video>
     <canvas class="hero-ascii" id="hero-ascii"></canvas>
     <div class="hero-grain"></div>
     <div class="hero-gradient"></div>
@@ -2502,10 +2504,11 @@ p{ margin:0; }
 
 <script>
 /* =========================================================
-   ASCII del hero: la foto convertida a caracteres, en verde,
-   con un leve movimiento.
-   Si el navegador no deja leer los pixeles de la imagen, usa un
-   campo de ruido animado ("nubes") en su lugar.
+   ASCII del hero: la imagen o el video de fondo convertido a
+   caracteres, en verde, con un leve movimiento. Con video se
+   vuelve a muestrear en cada cuadro del ascii.
+   Si el navegador no deja leer los pixeles, usa un campo de
+   ruido animado ("nubes") en su lugar.
    ========================================================= */
 (function(){
   "use strict";
@@ -2516,6 +2519,8 @@ p{ margin:0; }
 
   var ctx = canvas.getContext('2d');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isVideo = img.tagName === 'VIDEO';
+  var sCanvas = null, sCtx = null, sampleFailed = false;
   var RAMP = ' .:-=+*#%@';
   var GREEN = '124,179,80';
   var BUCKETS = 6;
@@ -2539,18 +2544,31 @@ p{ margin:0; }
     }
   }
 
+  /* tamanio de la fuente si ya hay un cuadro que leer; con video, readyState 2 = hay cuadro actual */
+  function sourceSize(){
+    var w = isVideo ? img.videoWidth : img.naturalWidth;
+    var h = isVideo ? img.videoHeight : img.naturalHeight;
+    var ok = isVideo ? img.readyState >= 2 : img.complete;
+    return ok && w && h ? { w: w, h: h } : null;
+  }
+
   function sampleImage(){
-    lum = new Float32Array(cols * rows);
     noiseOnly = false;
-    if (!img.complete || !img.naturalWidth){ noiseOnly = true; return; }
+    var size = sourceSize();
+    /* un video que aun no tiene cuadro no dibuja nada (se ve el poster); una imagen sin cargar usa el ruido */
+    if (!size){ noiseOnly = !isVideo; return; }
+    if (sampleFailed){ noiseOnly = true; return; }
     try {
-      var s = document.createElement('canvas');
-      s.width = cols; s.height = rows;
-      var sc = s.getContext('2d', { willReadFrequently:true });
+      if (!sCanvas){
+        sCanvas = document.createElement('canvas');
+        sCtx = sCanvas.getContext('2d', { willReadFrequently:true });
+      }
+      if (sCanvas.width !== cols || sCanvas.height !== rows){ sCanvas.width = cols; sCanvas.height = rows; }
+      var sc = sCtx;
       /* mismo recorte que object-fit:cover */
-      var ir = img.naturalWidth / img.naturalHeight, br = W / H, sw, sh, sx, sy;
-      if (ir > br){ sh = img.naturalHeight; sw = sh * br; sx = (img.naturalWidth - sw) / 2; sy = 0; }
-      else { sw = img.naturalWidth; sh = sw / br; sx = 0; sy = (img.naturalHeight - sh) / 2; }
+      var ir = size.w / size.h, br = W / H, sw, sh, sx, sy;
+      if (ir > br){ sh = size.h; sw = sh * br; sx = (size.w - sw) / 2; sy = 0; }
+      else { sw = size.w; sh = sw / br; sx = 0; sy = (size.h - sh) / 2; }
       sc.drawImage(img, sx, sy, sw, sh, 0, 0, cols, rows);
       var d = sc.getImageData(0, 0, cols, rows).data;
       for (var i = 0, j = 0; i < d.length; i += 4, j++){
@@ -2559,14 +2577,14 @@ p{ margin:0; }
         lum[j] = Math.max(l, sat * 1.5);
       }
       /* estira el contraste (percentiles 3% y 98%) para que fotos oscuras tambien se lean */
-      var sorted = Array.prototype.slice.call(lum).sort(function(a, b){ return a - b; });
+      var sorted = new Float32Array(lum).sort();
       var lo = sorted[Math.floor(sorted.length * 0.03)], hi = sorted[Math.floor(sorted.length * 0.98)];
       var span = Math.max(0.05, hi - lo);
       for (var m = 0; m < lum.length; m++){
         var nv = (lum[m] - lo) / span;
         lum[m] = Math.pow(Math.min(1, Math.max(0, nv)), 0.75);
       }
-    } catch (e){ noiseOnly = true; }
+    } catch (e){ noiseOnly = true; sampleFailed = true; }
   }
 
   function noise(x, y, t){
@@ -2587,6 +2605,7 @@ p{ margin:0; }
     rows = Math.ceil(H / ch);
     colWave = new Float32Array(cols);
     rowWave = new Float32Array(rows);
+    lum = new Float32Array(cols * rows);
     buildAtlas();
     sampleImage();
     draw(performance.now());
@@ -2618,15 +2637,24 @@ p{ margin:0; }
 
   /* se adapta al equipo: si dibujar un cuadro tarda, se espera mas entre cuadros (el trabajo
      nunca pasa de ~1/6 del tiempo) y si tarda demasiado la animacion se detiene en el ultimo cuadro */
-  var cost = 0, frozen = false;
+  var cost = 0, frozen = false, ticks = 0;
   function loop(t){
     if (!running) return;
     if (t - last > Math.max(W < 700 ? 90 : 83, cost * 6)){
       last = t;
       var t0 = performance.now();
+      if (isVideo) sampleImage();
       draw(t);
-      cost = cost * 0.7 + (performance.now() - t0) * 0.3;
-      if (cost > 30){ frozen = true; running = false; return; }
+      var spent = performance.now() - t0;
+      /* con video, los primeros cuadros incluyen el arranque de la lectura de pixeles (cientos de ms
+         una sola vez): no cuentan, o bastaria el primero para dar el equipo por lento */
+      if (!isVideo || ticks++ >= 3) cost = cost * 0.7 + spent * 0.3;
+      if (cost > 30){
+        frozen = true; running = false;
+        /* con video, un ascii congelado no coincidiria con la imagen: se quita */
+        if (isVideo) ctx.clearRect(0, 0, W, H);
+        return;
+      }
     }
     requestAnimationFrame(loop);
   }
@@ -2636,19 +2664,38 @@ p{ margin:0; }
   }
   function stop(){ running = false; }
 
+  /* el video solo corre mientras el hero esta a la vista */
+  function syncVideo(){
+    if (!isVideo || reduceMotion) return;
+    if (visible && !document.hidden){
+      var p = img.play();
+      if (p && p.catch) p.catch(function(){});
+    } else img.pause();
+  }
+
   if ('IntersectionObserver' in window){
     new IntersectionObserver(function(entries){
       visible = entries[0].isIntersecting;
+      syncVideo();
       if (visible) start(); else stop();
     }).observe(hero);
   }
-  document.addEventListener('visibilitychange', function(){ if (document.hidden) stop(); else start(); });
+  document.addEventListener('visibilitychange', function(){
+    syncVideo();
+    if (document.hidden) stop(); else start();
+  });
 
   var rt;
   window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(resize, 150); });
 
   function init(){ resize(); start(); }
-  if (img.complete && img.naturalWidth) init();
+  if (isVideo){
+    /* con movimiento reducido el video queda quieto en su primer cuadro */
+    if (reduceMotion){ img.removeAttribute('autoplay'); img.pause(); }
+    img.addEventListener('loadeddata', function(){ sampleImage(); draw(performance.now()); });
+    init();
+  }
+  else if (img.complete && img.naturalWidth) init();
   else { img.addEventListener('load', init); img.addEventListener('error', init); }
 })();
 </script>
