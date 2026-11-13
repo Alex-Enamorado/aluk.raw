@@ -2528,6 +2528,8 @@ p{ margin:0; }
   var cw, ch, cols, rows, dpr, W, H, lum = null, noiseOnly = false;
   var running = false, visible = true, last = 0;
   var atlas = null, aw = 0, ah = 0, colWave = null, rowWave = null;
+  /* multiplicador del tamanio de celda: sube si el equipo va justo (menos celdas = menos trabajo) */
+  var scale = 1;
 
   /* un caracter de cada nivel y de cada brillo, pintados una sola vez: pintar con drawImage
      desde este atlas cuesta mucho menos que fillText en miles de celdas por cuadro */
@@ -2599,8 +2601,8 @@ p{ margin:0; }
     dpr = 1;
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
-    cw = W < 700 ? 10 : 13;
-    ch = W < 700 ? 16 : 20;
+    cw = Math.round((W < 700 ? 10 : 13) * scale);
+    ch = Math.round((W < 700 ? 16 : 20) * scale);
     cols = Math.ceil(W / cw);
     rows = Math.ceil(H / ch);
     colWave = new Float32Array(cols);
@@ -2636,7 +2638,8 @@ p{ margin:0; }
   }
 
   /* se adapta al equipo: si dibujar un cuadro tarda, se espera mas entre cuadros (el trabajo
-     nunca pasa de ~1/6 del tiempo) y si tarda demasiado la animacion se detiene en el ultimo cuadro */
+     nunca pasa de ~1/6 del tiempo). Si aun asi tarda demasiado: con imagen la animacion se detiene
+     en el ultimo cuadro; con video el ascii nunca se quita, solo se agrandan las celdas */
   var cost = 0, frozen = false, ticks = 0;
   function loop(t){
     if (!running) return;
@@ -2650,10 +2653,14 @@ p{ margin:0; }
          una sola vez): no cuentan, o bastaria el primero para dar el equipo por lento */
       if (!isVideo || ticks++ >= 3) cost = cost * 0.7 + spent * 0.3;
       if (cost > 30){
-        frozen = true; running = false;
-        /* con video, un ascii congelado no coincidiria con la imagen: se quita */
-        if (isVideo) ctx.clearRect(0, 0, W, H);
-        return;
+        if (!isVideo){ frozen = true; running = false; return; }
+        /* con video un ascii congelado no coincidiria con la imagen y quitarlo se nota: se pasa a
+           celdas mas grandes (hasta 2 veces) y, si aun asi va justo, solo se espacian mas los cuadros */
+        if (scale < 2){
+          scale = scale < 1.2 ? 1.45 : 2.1;
+          cost = 0;
+          resize();
+        }
       }
     }
     requestAnimationFrame(loop);
